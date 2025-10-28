@@ -39,8 +39,15 @@ os.environ["TWILIO_ACCOUNT_SID"] = "test-twilio-sid"
 os.environ["TWILIO_AUTH_TOKEN"] = "test-twilio-token"
 os.environ["TWILIO_PHONE_NUMBER"] = "+1234567890"
 
-from app.main import app
-from app.dependencies import get_db
+# Only load the full app if not running ORM-only tests
+# ORM tests set SKIP_APP_LOAD=1 to avoid loading FastAPI and all dependencies
+if os.environ.get("SKIP_APP_LOAD") != "1":
+    from app.main import app
+    from app.dependencies import get_db
+else:
+    # For ORM tests, we don't need the app
+    app = None
+    get_db = None
 
 # Import all fixture modules to make them available
 pytest_plugins = [

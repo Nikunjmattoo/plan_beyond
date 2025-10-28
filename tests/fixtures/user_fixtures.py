@@ -8,7 +8,7 @@ from typing import Optional
 from app.models.user import User, UserProfile, UserStatus
 from app.models.admin import Admin
 from app.models.contact import Contact
-from core.security import hash_password
+from app.core.security import hash_password
 
 
 # ==============================================

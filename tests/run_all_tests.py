@@ -21,16 +21,13 @@ def create_progress_bar(current, total, width=40):
 
 
 def parse_pytest_verbose_output(output):
-    """Parse pytest -v output to get per-file results and bug tracking"""
+    """Parse pytest -v output to get per-file results"""
     lines = output.split('\n')
 
     # Track results per file
     file_results = {}
-    bugs_found = []
-    bug_details = {}  # Map bug number to {test_name, title, line_info}
-    current_test = None
 
-    for i, line in enumerate(lines):
+    for line in lines:
         # Match test execution lines: "tests/unit/models/test_user_model.py::test_name PASSED"
         if '::' in line and ('PASSED' in line or 'FAILED' in line or 'SKIPPED' in line):
             parts = line.split('::')
@@ -39,12 +36,8 @@ def parse_pytest_verbose_output(output):
                 # Extract just the filename
                 filename = Path(file_path).name
 
-                # Extract test name
-                test_name_part = parts[1].split(' ')[0].strip()
-                current_test = test_name_part
-
                 if filename not in file_results:
-                    file_results[filename] = {'passed': 0, 'failed': 0, 'skipped': 0, 'bugs': []}
+                    file_results[filename] = {'passed': 0, 'failed': 0, 'skipped': 0}
 
                 if 'PASSED' in line:
                     file_results[filename]['passed'] += 1
@@ -53,23 +46,7 @@ def parse_pytest_verbose_output(output):
                 elif 'SKIPPED' in line:
                     file_results[filename]['skipped'] += 1
 
-        # Detect production bugs (standardized format: "[!] PRODUCTION BUG #X: Title")
-        if '[!] PRODUCTION BUG #' in line:
-            bug_match = re.search(r'PRODUCTION BUG #(\d+)(?:: (.+))?', line)
-            if bug_match:
-                bug_num = bug_match.group(1)
-                bug_title = bug_match.group(2).strip() if bug_match.group(2) else ""
-                bug_id = f"Bug #{bug_num}: {bug_title}" if bug_title else f"Bug #{bug_num}"
-                bugs_found.append(bug_id)
-
-                # Store bug details with test name
-                bug_details[bug_num] = {
-                    'title': bug_title,
-                    'test': current_test,
-                    'full_id': bug_id
-                }
-
-    return file_results, bugs_found, bug_details
+    return file_results
 
 
 def run_module(module_name, test_path, project_root):
@@ -111,10 +88,10 @@ def run_module(module_name, test_path, project_root):
     # Combine all output
     output = ''.join(output_lines)
 
-    # Parse output for test results and bugs
-    file_results, bugs_found, bug_details = parse_pytest_verbose_output(output)
+    # Parse output for test results
+    file_results = parse_pytest_verbose_output(output)
 
-    return file_results, bugs_found, bug_details, output
+    return file_results, output
 
 
 def main():
@@ -127,14 +104,12 @@ def main():
 
     # Track overall results
     all_results = []
-    all_bugs = []
-    all_bug_details = {}  # Track which tests found which bugs
 
     # ======================================================================
     # MODULE 0: ORM MODELS (156 tests)
     # ======================================================================
 
-    file_results, bugs, bug_details, output = run_module(
+    file_results, output = run_module(
         "MODULE 0: ORM MODEL TEST SUITE",
         "tests/unit/models/",
         project_root
@@ -189,14 +164,12 @@ def main():
     print(f"Result: {module0_results['passed']} passed, {module0_results['failed']} failed, {module0_results['skipped']} skipped")
 
     all_results.append(('Module 0: ORM Models', module0_results))
-    all_bugs.extend(bugs)
-    all_bug_details.update(bug_details)
 
     # ======================================================================
     # MODULE 1: FOUNDATION - DATABASE MODELS (45 tests)
     # ======================================================================
 
-    file_results, bugs, bug_details, output = run_module(
+    file_results, output = run_module(
         "MODULE 1: FOUNDATION - DATABASE MODELS",
         "tests/unit/foundation/test_database_models.py",
         project_root
@@ -223,14 +196,12 @@ def main():
         print("\nNo tests found")
 
     all_results.append(('Module 1: Foundation - Database Models', module1_results))
-    all_bugs.extend(bugs)
-    all_bug_details.update(bug_details)
 
     # ======================================================================
     # MODULE 2: AUTH (85 tests)
     # ======================================================================
 
-    file_results, bugs, bug_details, output = run_module(
+    file_results, output = run_module(
         "MODULE 2: AUTH - USER AUTHENTICATION & AUTHORIZATION",
         "tests/unit/auth/",
         project_root
@@ -281,8 +252,6 @@ def main():
         print("\nNo tests found")
 
     all_results.append(('Module 2: Auth', module2_results))
-    all_bugs.extend(bugs)
-    all_bug_details.update(bug_details)
 
     # ======================================================================
     # OVERALL SUMMARY
@@ -322,26 +291,13 @@ def main():
     else:
         print(f"\n[!] WARNING: Counts don't tally: {overall['passed']} + {overall['failed']} + {overall['skipped']} != {overall['total']}")
 
-    # Production bugs found
-    if all_bugs:
+    # Show failed tests summary
+    if overall['failed'] > 0:
         print("\n" + "="*70)
-        print("[!] PRODUCTION BUGS DISCOVERED")
+        print("[!] FAILED TESTS (Production Bugs Found)")
         print("="*70)
-        unique_bugs = sorted(list(set(all_bugs)))
-        print(f"\nTotal bugs found: {len(unique_bugs)}\n")
-
-        # Show each bug with the test that found it
-        for bug in unique_bugs:
-            print(f"  - {bug}")
-            # Find which test discovered this bug
-            bug_num = bug.split('#')[1].split(':')[0].strip()
-            if bug_num in all_bug_details:
-                detail = all_bug_details[bug_num]
-                if detail['test']:
-                    print(f"    Found by test: {detail['test']}")
-
-        print("\n" + "="*70)
-        print("See detailed bug reports in test output above.")
+        print(f"\n{overall['failed']} test(s) failed - these tests found production bugs.")
+        print("See detailed failure output and bug reports above.")
         print("="*70)
 
     # Progress toward complete test suite

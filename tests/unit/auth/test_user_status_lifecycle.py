@@ -157,8 +157,8 @@ def test_cannot_skip_states(db_session):
             fix="Add state machine validation: only allow unknown->guest->verified->member transitions",
             location="User status update code - needs transition validation logic"
         )
-        # Pass test to continue finding other bugs
-        assert True
+        # FAIL the test - production bug found
+        assert False, "PRODUCTION BUG #6: Status Transition Validation Missing"
     else:
         assert user.status == UserStatus.unknown  # Should be rejected
 

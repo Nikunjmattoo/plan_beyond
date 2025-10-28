@@ -209,8 +209,8 @@ def test_submit_verification_creates_history_entry(db_session):
             fix="Create UserStatusHistory entry whenever verification status changes",
             location="controller/verification.py - submit_verification()"
         )
-        # Pass test to continue finding other bugs
-        assert True
+        # FAIL the test - production bug found
+        assert False, "PRODUCTION BUG #2: No Status History Tracking"
     else:
         assert history.user_id == user.id
 

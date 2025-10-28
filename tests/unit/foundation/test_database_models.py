@@ -614,8 +614,8 @@ def test_user_email_case_sensitivity(db_session):
         db_session.delete(user2)
         db_session.delete(user1)
         db_session.commit()
-        # Pass test to continue finding other bugs
-        assert True
+        # FAIL the test - production bug found
+        assert False, "PRODUCTION BUG #1: Email Case Sensitivity"
     except IntegrityError:
         # Good! Database enforces uniqueness regardless of case
         db_session.rollback()

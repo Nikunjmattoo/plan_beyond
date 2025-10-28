@@ -460,7 +460,7 @@ def test_delete_contact_cascade_on_owner_delete(db_session):
             fix="Add CASCADE delete constraint to Contact.owner_user_id foreign key",
             location="models/contact.py - owner_user_id foreign key definition"
         )
-        assert True  # Pass to continue
+        assert False, "PRODUCTION BUG #3: Contacts Not Cascading On Owner Delete"
     else:
         assert found1 is None
         assert found2 is None

@@ -15,6 +15,7 @@ from controller.contact import (
 from app.models.contact import Contact
 from app.models.user import User, UserStatus
 from app.schemas.contact import ContactCreate
+from tests.helpers.bug_reporter import report_production_bug
 
 
 # ==============================================
@@ -451,12 +452,14 @@ def test_delete_contact_cascade_on_owner_delete(db_session):
     # If CASCADE is configured correctly, these should be None
     # If not, we have a PRODUCTION BUG: orphaned contacts!
     if found1 is not None or found2 is not None:
-        print("\n" + "="*70)
-        print("🔥 PRODUCTION BUG #3: Contacts not cascading on owner delete")
-        print("="*70)
-        print("Issue: Contacts remain when owner is deleted")
-        print("Impact: Orphaned data, potential privacy leak")
-        print("Fix: Add CASCADE to Contact.owner_user_id foreign key")
+        report_production_bug(
+            bug_number=3,
+            title="Contacts Not Cascading On Owner Delete",
+            issue="Contacts remain in database when owner user is deleted",
+            impact="Orphaned data leads to privacy leaks and GDPR violations",
+            fix="Add CASCADE delete constraint to Contact.owner_user_id foreign key",
+            location="models/contact.py - owner_user_id foreign key definition"
+        )
         assert True  # Pass to continue
     else:
         assert found1 is None

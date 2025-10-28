@@ -12,6 +12,7 @@ from app.models.contact import Contact
 from app.models.admin import Admin
 from app.models.vault import VaultFile
 from app.core.security import hash_password
+from tests.helpers.bug_reporter import report_production_bug
 
 
 # ==============================================
@@ -601,15 +602,14 @@ def test_user_email_case_sensitivity(db_session):
     try:
         db_session.commit()
         # If we get here, emails are case-sensitive (BUG FOUND!)
-        print("\n" + "="*70)
-        print("🔥 PRODUCTION BUG #1 FOUND: Email Case Sensitivity")
-        print("="*70)
-        print("Issue: Database allows duplicate emails with different cases")
-        print("  - test@example.com and Test@example.com both allowed")
-        print("  - Email should be case-insensitive per RFC 5321")
-        print("Impact: Users can create duplicate accounts")
-        print("Fix: Use CITEXT column or lowercase emails before saving")
-        print("="*70)
+        report_production_bug(
+            bug_number=1,
+            title="Email Case Sensitivity",
+            issue="Database allows duplicate emails with different cases (test@example.com and Test@example.com)",
+            impact="Users can create duplicate accounts bypassing uniqueness constraint",
+            fix="Use CITEXT column type OR normalize emails to lowercase before saving",
+            location="models/user.py - email column definition"
+        )
         # Clean up both users
         db_session.delete(user2)
         db_session.delete(user1)

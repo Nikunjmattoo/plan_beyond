@@ -47,11 +47,14 @@ def parse_pytest_verbose_output(output):
                 elif 'SKIPPED' in line:
                     file_results[filename]['skipped'] += 1
 
-        # Detect production bugs
-        if '🔥 PRODUCTION BUG' in line:
-            bug_match = re.search(r'PRODUCTION BUG #(\d+)', line)
+        # Detect production bugs (standardized format: "🔥 PRODUCTION BUG #X: Title")
+        if '🔥 PRODUCTION BUG #' in line:
+            bug_match = re.search(r'PRODUCTION BUG #(\d+)(?:: (.+))?', line)
             if bug_match:
-                bugs_found.append(bug_match.group(0))
+                bug_num = bug_match.group(1)
+                bug_title = bug_match.group(2).strip() if bug_match.group(2) else ""
+                bug_id = f"Bug #{bug_num}: {bug_title}" if bug_title else f"Bug #{bug_num}"
+                bugs_found.append(bug_id)
 
     return file_results, bugs_found
 

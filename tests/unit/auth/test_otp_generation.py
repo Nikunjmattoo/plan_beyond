@@ -10,6 +10,7 @@ import random
 import string
 
 from app.models.user import User, UserStatus
+from tests.helpers.bug_reporter import report_production_bug
 
 
 # ==============================================
@@ -72,12 +73,14 @@ def test_generate_otp_randomness(db_session):
 
     # If all OTPs are identical, we have a CRITICAL security bug!
     if len(unique_otps) == 1:
-        print("\n" + "="*70)
-        print("🔥 PRODUCTION BUG #4: OTP generation not random")
-        print("="*70)
-        print(f"Issue: All OTPs are identical: {list(unique_otps)[0]}")
-        print("Impact: CRITICAL - Attacker can predict OTPs!")
-        print("Fix: Use cryptographically secure random number generator")
+        report_production_bug(
+            bug_number=4,
+            title="OTP Generation Not Random",
+            issue=f"All OTPs are identical: {list(unique_otps)[0]} - no randomness!",
+            impact="CRITICAL SECURITY - Attacker can predict all OTPs and bypass authentication",
+            fix="Use secrets.randbelow() or random.SystemRandom() instead of random.choice()",
+            location="OTP generation code - likely using non-cryptographic random"
+        )
         assert False, "OTP generation is broken!"
 
 
@@ -197,12 +200,14 @@ def test_expired_otp_rejected(db_session):
     # Verification should fail for expired OTP
     # This test documents the expected behavior
     if not is_expired:
-        print("\n" + "="*70)
-        print("🔥 PRODUCTION BUG #5: Expired OTP accepted")
-        print("="*70)
-        print("Issue: System accepts OTPs past expiry time")
-        print("Impact: CRITICAL - Old OTPs can be reused indefinitely")
-        print("Fix: Check otp_expires_at before accepting OTP")
+        report_production_bug(
+            bug_number=5,
+            title="Expired OTP Accepted",
+            issue="System accepts OTPs past their expiry time",
+            impact="CRITICAL SECURITY - Old OTPs can be reused indefinitely, enabling replay attacks",
+            fix="Check if otp_expires_at < datetime.utcnow() before accepting OTP",
+            location="OTP verification endpoint - missing expiry check"
+        )
         assert False, "Expired OTP was accepted!"
 
 

@@ -4,7 +4,6 @@ Root conftest.py - Shared fixtures for all tests
 import os
 import sys
 import pytest
-from fastapi.testclient import TestClient
 
 # Add parent directory to Python path
 # This makes /home/user/plan_beyond importable
@@ -39,29 +38,37 @@ os.environ["TWILIO_ACCOUNT_SID"] = "test-twilio-sid"
 os.environ["TWILIO_AUTH_TOKEN"] = "test-twilio-token"
 os.environ["TWILIO_PHONE_NUMBER"] = "+1234567890"
 
+# Detect if running ORM tests - they're in tests/unit/models/ and don't need full app
+_running_orm_tests = any('tests/unit/models' in arg or 'tests\\unit\\models' in arg for arg in sys.argv)
+
 # Only load the full app if not running ORM-only tests
-# ORM tests set SKIP_APP_LOAD=1 to avoid loading FastAPI and all dependencies
-if os.environ.get("SKIP_APP_LOAD") != "1":
+if not _running_orm_tests:
+    from fastapi.testclient import TestClient
     from app.main import app
     from app.dependencies import get_db
+
+    # Import all fixture modules to make them available
+    pytest_plugins = [
+        "tests.fixtures.database_fixtures",
+        "tests.fixtures.user_fixtures",
+        "tests.fixtures.auth_fixtures",
+    ]
 else:
-    # For ORM tests, we don't need the app
+    # For ORM tests, we don't need the app or fixtures
+    TestClient = None
     app = None
     get_db = None
-
-# Import all fixture modules to make them available
-pytest_plugins = [
-    "tests.fixtures.database_fixtures",
-    "tests.fixtures.user_fixtures",
-    "tests.fixtures.auth_fixtures",
-]
+    pytest_plugins = []
 
 
 @pytest.fixture(scope="function")
-def client(db_session) -> TestClient:
+def client(db_session):
     """
     Create a FastAPI test client with overridden database dependency.
     """
+    if app is None:
+        pytest.skip("FastAPI app not loaded for ORM tests")
+
     def override_get_db():
         try:
             yield db_session

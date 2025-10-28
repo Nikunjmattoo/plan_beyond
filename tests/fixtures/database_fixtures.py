@@ -9,12 +9,33 @@ Strategy:
 import pytest
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy.pool import NullPool
+from sqlalchemy.pool import NullPool, StaticPool
 from typing import Generator
 import time
 
 from app.database import Base
 from app.config import settings
+
+# Import all model classes to register them with Base.metadata
+from app.models.user import User, UserProfile  # noqa
+from app.models.admin import Admin  # noqa
+from app.models.contact import Contact  # noqa
+from app.models.vault import VaultFile, VaultFileAccess  # noqa
+from app.models.folder import Folder, FolderBranch, FolderLeaf, FolderTrigger  # noqa
+from app.models.memory import MemoryCollection, MemoryFile, MemoryFileAssignment, MemoryCollectionAssignment  # noqa
+from app.models.death import DeathAck, DeathDeclaration, DeathLock, LegendLifecycle, DeathReview, Contest, Broadcast, Config, AuditLog  # noqa
+from app.models.trustee import Trustee  # noqa
+from app.models.category import CategoryMaster, CategorySectionMaster, UserCategory, UserCategorySection, CategoryFile, CategoryLeafAssignment  # noqa
+from app.models.reminder import Reminder  # noqa
+from app.models.relationship import RelationshipRequest  # noqa
+from app.models.card import SectionItemTemplate, UserSectionItem  # noqa
+from app.models.death_approval import DeathApproval  # noqa
+from app.models.release import Release, ReleaseRecipient  # noqa
+from app.models.step import FormStep, StepOption  # noqa
+from app.models.file import File  # noqa
+from app.models.user_forms import UserSectionProgress, UserStepAnswer  # noqa
+from app.models.verification import IdentityVerification, UserStatusHistory  # noqa
+from app.models.reminder_preference import ReminderPreference  # noqa
 
 
 def get_test_database_url() -> tuple[str, str]:
@@ -94,11 +115,11 @@ def test_db_engine():
         print(f"[OK] Created all tables in test database")
 
     else:
-        # SQLite fallback (in-memory)
+        # SQLite fallback (in-memory) - use StaticPool to keep single connection alive
         test_engine = create_engine(
             "sqlite:///:memory:",
             connect_args={"check_same_thread": False},
-            poolclass=NullPool
+            poolclass=StaticPool
         )
 
         # Enable foreign key constraints for SQLite
@@ -157,7 +178,11 @@ def db_session(test_db_engine) -> Generator[Session, None, None]:
 
     # Clear all tables for next test (maintain isolation)
     for table in reversed(Base.metadata.sorted_tables):
-        session.execute(table.delete())
+        try:
+            session.execute(table.delete())
+        except Exception:
+            # Skip tables that don't exist (e.g., in SQLite)
+            pass
     session.commit()
 
     session.close()

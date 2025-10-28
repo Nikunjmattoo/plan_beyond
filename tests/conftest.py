@@ -41,8 +41,11 @@ os.environ["TWILIO_PHONE_NUMBER"] = "+1234567890"
 # Detect if running ORM tests - they're in tests/unit/models/ and don't need full app
 _running_orm_tests = any('tests/unit/models' in arg or 'tests\\unit\\models' in arg for arg in sys.argv)
 
-# Only load the full app if not running ORM-only tests
-if not _running_orm_tests:
+# Detect if running foundation tests - they don't need full app either
+_running_foundation_tests = any('tests/unit/foundation' in arg or 'tests\\unit\\foundation' in arg for arg in sys.argv)
+
+# Only load the full app if not running ORM-only or foundation tests
+if not _running_orm_tests and not _running_foundation_tests:
     from fastapi.testclient import TestClient
     from app.main import app
     from app.dependencies import get_db
@@ -54,7 +57,7 @@ if not _running_orm_tests:
         "tests.fixtures.auth_fixtures",
     ]
 else:
-    # For ORM tests, we don't need the app or fixtures
+    # For ORM and foundation tests, we don't need the app or fixtures
     TestClient = None
     app = None
     get_db = None

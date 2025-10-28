@@ -254,6 +254,63 @@ def main():
     all_results.append(('Module 2: Auth', module2_results))
 
     # ======================================================================
+    # MODULE 3: VAULT & ENCRYPTION (125 tests)
+    # ======================================================================
+
+    file_results, output = run_module(
+        "MODULE 3: VAULT & ENCRYPTION",
+        "tests/unit/vault/",
+        project_root
+    )
+
+    # Expected Vault test files
+    vault_files = [
+        ('test_crypto_engine.py', 'CryptoEngine'),
+        ('test_vault_encryptor.py', 'Vault Encryptor'),
+        ('test_vault_decryptor.py', 'Vault Decryptor'),
+        ('test_db_operations.py', 'Database Operations'),
+        ('test_s3_operations.py', 'S3 Operations'),
+        ('test_validators.py', 'Validators'),
+        ('test_exceptions.py', 'Exceptions'),
+    ]
+
+    print("\n" + "="*70)
+    print("MODULE 3 RESULTS")
+    print("="*70)
+
+    module3_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
+
+    for filename, module_name in vault_files:
+        if filename in file_results:
+            results = file_results[filename]
+
+            total = results['passed'] + results['failed'] + results['skipped']
+            progress = create_progress_bar(results['passed'], total, width=30)
+
+            print(f"\n{module_name}:")
+            print(f"  {progress} {results['passed']}/{total}")
+            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
+
+            module3_results['passed'] += results['passed']
+            module3_results['failed'] += results['failed']
+            module3_results['skipped'] += results['skipped']
+
+    module3_results['total'] = module3_results['passed'] + module3_results['failed'] + module3_results['skipped']
+
+    print("\n" + "="*70)
+    print("MODULE 3 SUMMARY")
+    print("="*70)
+
+    if module3_results['total'] > 0:
+        progress = create_progress_bar(module3_results['passed'], module3_results['total'])
+        print(f"\nProgress: {progress} {module3_results['passed']}/{module3_results['total']} tests")
+        print(f"Result: {module3_results['passed']} passed, {module3_results['failed']} failed, {module3_results['skipped']} skipped")
+    else:
+        print("\nNo tests found")
+
+    all_results.append(('Module 3: Vault & Encryption', module3_results))
+
+    # ======================================================================
     # OVERALL SUMMARY
     # ======================================================================
 
@@ -309,13 +366,15 @@ def main():
     module0_count = all_results[0][1]['total'] if len(all_results) > 0 else 0
     module1_count = all_results[1][1]['total'] if len(all_results) > 1 else 0
     module2_count = all_results[2][1]['total'] if len(all_results) > 2 else 0
+    module3_count = all_results[3][1]['total'] if len(all_results) > 3 else 0
 
     print(f"\n[OK] Module 0 (ORM Models):        {module0_count}/156 tests")
     print(f"[OK] Module 1 (Foundation):        {module1_count}/102 tests (database models only)")
     print(f"     Module 1 Remaining:           {102 - module1_count} tests")
     print(f"[OK] Module 2 (Auth):              {module2_count}/130 tests (unit tests only)")
     print(f"     Module 2 Remaining:           {130 - module2_count} tests (integration tests)")
-    print(f"     Modules 3-12:                 1,257 tests")
+    print(f"[OK] Module 3 (Vault):             {module3_count}/125 tests")
+    print(f"     Modules 4-12:                 1,132 tests")
     print(f"\nTotal Completed:               {overall['total']}/1,644 tests")
     completion_pct = (overall['total'] / 1644) * 100
     print(f"Completion:                    {completion_pct:.1f}%")

@@ -20,56 +20,74 @@ def create_progress_bar(current, total, width=40):
     return f"[{bar}]"
 
 
-def parse_pytest_output(output):
-    """Parse pytest output to extract test results"""
+def parse_pytest_verbose_output(output):
+    """Parse pytest -v output to get per-file results"""
     lines = output.split('\n')
 
-    # Find test results
-    results = {
-        'passed': 0,
-        'failed': 0,
-        'skipped': 0,
-        'total': 0
-    }
+    # Track results per file
+    file_results = {}
+    current_file = None
 
-    # Look for the summary line: "156 passed in 5.14s"
     for line in lines:
-        if 'passed' in line or 'failed' in line or 'skipped' in line:
-            # Extract numbers
-            passed_match = re.search(r'(\d+) passed', line)
-            failed_match = re.search(r'(\d+) failed', line)
-            skipped_match = re.search(r'(\d+) skipped', line)
+        # Match test execution lines: "tests/unit/models/test_user_model.py::test_name PASSED"
+        if '::' in line and ('PASSED' in line or 'FAILED' in line or 'SKIPPED' in line):
+            parts = line.split('::')
+            if len(parts) >= 2:
+                file_path = parts[0].strip()
+                # Extract just the filename
+                filename = Path(file_path).name
 
-            if passed_match:
-                results['passed'] = int(passed_match.group(1))
-            if failed_match:
-                results['failed'] = int(failed_match.group(1))
-            if skipped_match:
-                results['skipped'] = int(skipped_match.group(1))
+                if filename not in file_results:
+                    file_results[filename] = {'passed': 0, 'failed': 0, 'skipped': 0}
 
-    results['total'] = results['passed'] + results['failed'] + results['skipped']
+                if 'PASSED' in line:
+                    file_results[filename]['passed'] += 1
+                elif 'FAILED' in line:
+                    file_results[filename]['failed'] += 1
+                elif 'SKIPPED' in line:
+                    file_results[filename]['skipped'] += 1
 
-    return results
+    return file_results
 
 
-def run_test_module(module_path, module_name):
-    """Run a single test module and return results"""
-    print(f"\n{'='*70}")
-    print(f"Running: {module_name}")
-    print('='*70)
+def get_module_name(filename):
+    """Convert filename to readable module name"""
+    name_map = {
+        'test_user_model.py': 'User Model',
+        'test_contact_model.py': 'Contact Model',
+        'test_vault_file_model.py': 'Vault File Model',
+        'test_folder_model.py': 'Folder Model',
+        'test_memory_collection_model.py': 'Memory Collection Model',
+        'test_death_declaration_model.py': 'Death Declaration Model',
+        'test_trustee_model.py': 'Trustee Model',
+        'test_category_model.py': 'Category Model',
+        'test_section_model.py': 'Section Model',
+        'test_step_model.py': 'Step Model',
+        'test_reminder_model.py': 'Reminder Model',
+        'test_admin_model.py': 'Admin Model',
+        'test_relationship_models.py': 'Relationship Models',
+    }
+    return name_map.get(filename, filename)
 
-    # Run pytest on the module
+
+def main():
+    """Run all ORM test modules and show aggregated results"""
+    print("\n" + "="*70)
+    print("MODULE 0: ORM MODEL TEST SUITE - PLAN BEYOND")
+    print("="*70)
+
+    # Run all ORM tests at once
+    project_root = Path(__file__).parent.parent
+
     cmd = [
         sys.executable, '-m', 'pytest',
-        str(module_path),
+        'tests/unit/models/',
         '-v',
         '--tb=short',
-        '--no-header',
         '-p', 'no:warnings'
     ]
 
-    # Run from project root (parent of tests directory)
-    project_root = Path(__file__).parent.parent
+    print("\nRunning all ORM tests...")
 
     result = subprocess.run(
         cmd,
@@ -80,77 +98,49 @@ def run_test_module(module_path, module_name):
 
     # Parse output
     output = result.stdout + result.stderr
-    results = parse_pytest_output(output)
+    file_results = parse_pytest_verbose_output(output)
 
-    # Show progress bar
-    total_tests = results['total']
-    passed_tests = results['passed']
-
-    if total_tests > 0:
-        progress = create_progress_bar(passed_tests, total_tests)
-        print(f"\nProgress: {progress} {passed_tests}/{total_tests} tests")
-
-    # Show results
-    print(f"\nResult: {results['passed']} passed, {results['failed']} failed, {results['skipped']} skipped")
-
-    return results
-
-
-def main():
-    """Run all ORM test modules and show aggregated results"""
-    print("\n" + "="*70)
-    print("MODULE 0: ORM MODEL TEST SUITE - PLAN BEYOND")
-    print("="*70)
-
-    # Define test modules (relative to project root)
-    test_modules = [
-        ('tests/unit/models/test_user_model.py', 'User Model'),
-        ('tests/unit/models/test_contact_model.py', 'Contact Model'),
-        ('tests/unit/models/test_vault_file_model.py', 'Vault File Model'),
-        ('tests/unit/models/test_folder_model.py', 'Folder Model'),
-        ('tests/unit/models/test_memory_collection_model.py', 'Memory Collection Model'),
-        ('tests/unit/models/test_death_declaration_model.py', 'Death Declaration Model'),
-        ('tests/unit/models/test_trustee_model.py', 'Trustee Model'),
-        ('tests/unit/models/test_category_model.py', 'Category Model'),
-        ('tests/unit/models/test_section_model.py', 'Section Model'),
-        ('tests/unit/models/test_step_model.py', 'Step Model'),
-        ('tests/unit/models/test_reminder_model.py', 'Reminder Model'),
-        ('tests/unit/models/test_admin_model.py', 'Admin Model'),
-        ('tests/unit/models/test_relationship_models.py', 'Relationship Models'),
+    # Define expected file order
+    expected_files = [
+        'test_user_model.py',
+        'test_contact_model.py',
+        'test_vault_file_model.py',
+        'test_folder_model.py',
+        'test_memory_collection_model.py',
+        'test_death_declaration_model.py',
+        'test_trustee_model.py',
+        'test_category_model.py',
+        'test_section_model.py',
+        'test_step_model.py',
+        'test_reminder_model.py',
+        'test_admin_model.py',
+        'test_relationship_models.py',
     ]
 
-    # Track overall results
-    overall = {
-        'passed': 0,
-        'failed': 0,
-        'skipped': 0,
-        'total': 0
-    }
-
-    module_results = []
-
-    # Run each module
-    for module_path, module_name in test_modules:
-        results = run_test_module(module_path, module_name)
-
-        # Track results
-        module_results.append((module_name, results))
-        overall['passed'] += results['passed']
-        overall['failed'] += results['failed']
-        overall['skipped'] += results['skipped']
-        overall['total'] += results['total']
-
-    # Print summary
+    # Print per-module results
     print("\n" + "="*70)
-    print("SUMMARY - PER MODULE RESULTS")
+    print("PER MODULE RESULTS")
     print("="*70)
 
-    for module_name, results in module_results:
-        print(f"\n{module_name}:")
-        print(f"  Passed:  {results['passed']}")
-        print(f"  Failed:  {results['failed']}")
-        print(f"  Skipped: {results['skipped']}")
-        print(f"  Total:   {results['total']}")
+    overall = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
+
+    for filename in expected_files:
+        if filename in file_results:
+            results = file_results[filename]
+            module_name = get_module_name(filename)
+
+            total = results['passed'] + results['failed'] + results['skipped']
+            progress = create_progress_bar(results['passed'], total, width=30)
+
+            print(f"\n{module_name}:")
+            print(f"  {progress} {results['passed']}/{total}")
+            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
+
+            overall['passed'] += results['passed']
+            overall['failed'] += results['failed']
+            overall['skipped'] += results['skipped']
+
+    overall['total'] = overall['passed'] + overall['failed'] + overall['skipped']
 
     # Print overall results
     print("\n" + "="*70)

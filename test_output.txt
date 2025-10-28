@@ -1,0 +1,1226 @@
+
+======================================================================
+COMPREHENSIVE TEST SUITE - PLAN BEYOND
+======================================================================
+
+======================================================================
+MODULE 0: ORM MODEL TEST SUITE
+======================================================================
+
+Running tests...
+
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-7.4.3, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /home/user/plan_beyond/tests
+configfile: pytest.ini
+plugins: asyncio-0.21.1, anyio-3.7.1, mock-3.12.0, cov-4.1.0
+asyncio: mode=Mode.STRICT
+collecting ... collected 156 items
+
+tests/unit/models/test_admin_model.py::test_admin_table_name PASSED
+tests/unit/models/test_admin_model.py::test_admin_all_columns_exist PASSED
+tests/unit/models/test_admin_model.py::test_admin_username_unique PASSED
+tests/unit/models/test_admin_model.py::test_admin_email_unique PASSED
+tests/unit/models/test_admin_model.py::test_admin_password_column PASSED
+tests/unit/models/test_admin_model.py::test_admin_otp_nullable PASSED
+tests/unit/models/test_admin_model.py::test_admin_repr_method PASSED
+tests/unit/models/test_admin_model.py::test_admin_otp_verified_default PASSED
+tests/unit/models/test_category_model.py::test_category_table_name PASSED
+tests/unit/models/test_category_model.py::test_category_all_columns_exist PASSED
+tests/unit/models/test_category_model.py::test_category_section_table_name PASSED
+tests/unit/models/test_category_model.py::test_category_code_column_unique PASSED
+tests/unit/models/test_category_model.py::test_category_name_nullable PASSED
+tests/unit/models/test_category_model.py::test_category_sort_index_column PASSED
+tests/unit/models/test_category_model.py::test_category_code_not_nullable PASSED
+tests/unit/models/test_category_model.py::test_category_section_category_id_foreign_key PASSED
+tests/unit/models/test_category_model.py::test_category_repr_method PASSED
+tests/unit/models/test_category_model.py::test_category_section_cascade_delete PASSED
+tests/unit/models/test_contact_model.py::test_contact_model_table_name PASSED
+tests/unit/models/test_contact_model.py::test_contact_all_columns_exist PASSED
+tests/unit/models/test_contact_model.py::test_contact_first_name_column PASSED
+tests/unit/models/test_contact_model.py::test_contact_emails_json_column PASSED
+tests/unit/models/test_contact_model.py::test_contact_phone_numbers_json_column PASSED
+tests/unit/models/test_contact_model.py::test_contact_owner_user_id_foreign_key PASSED
+tests/unit/models/test_contact_model.py::test_contact_linked_user_id_foreign_key PASSED
+tests/unit/models/test_contact_model.py::test_contact_is_emergency_default_false PASSED
+tests/unit/models/test_contact_model.py::test_contact_owner_relationship PASSED
+tests/unit/models/test_contact_model.py::test_contact_linked_user_relationship PASSED
+tests/unit/models/test_contact_model.py::test_contact_repr_method PASSED
+tests/unit/models/test_contact_model.py::test_contact_cascade_delete PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_table_name PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_all_columns_exist PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_root_user_id_foreign_key PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_declarer_contact_id_foreign_key PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_type_enum PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_state_enum PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_message_nullable PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_evidence_file_nullable PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_root_user_relationship PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_declarer_relationship PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_type_enum_values PASSED
+tests/unit/models/test_death_declaration_model.py::test_declaration_state_enum_values PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_timestamps PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_repr_method PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_cascade_delete PASSED
+tests/unit/models/test_folder_model.py::test_folder_table_name PASSED
+tests/unit/models/test_folder_model.py::test_folder_all_columns_exist PASSED
+tests/unit/models/test_folder_model.py::test_folder_name_column PASSED
+tests/unit/models/test_folder_model.py::test_folder_user_id_foreign_key PASSED
+tests/unit/models/test_folder_model.py::test_folder_user_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_branches_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_leaves_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_trigger_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_files_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_timestamps PASSED
+tests/unit/models/test_folder_model.py::test_folder_repr_method PASSED
+tests/unit/models/test_folder_model.py::test_folder_cascade_delete PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_table_name PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_all_columns_exist PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_user_id_foreign_key PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_event_type_enum PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_scheduled_at_nullable PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_is_armed_default PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_user_relationship PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_files_relationship PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_assignments_relationship PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_timestamps PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_repr_method PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_cascade_delete PASSED
+tests/unit/models/test_relationship_models.py::test_folder_branch_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_folder_branch_unique_constraint PASSED
+tests/unit/models/test_relationship_models.py::test_folder_leaf_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_folder_leaf_unique_constraint PASSED
+tests/unit/models/test_relationship_models.py::test_memory_assignment_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_memory_assignment_unique_constraint PASSED
+tests/unit/models/test_relationship_models.py::test_vault_access_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_vault_access_status_column PASSED
+tests/unit/models/test_relationship_models.py::test_vault_access_unique_constraint PASSED
+tests/unit/models/test_relationship_models.py::test_death_approval_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_death_approval_status_column PASSED
+tests/unit/models/test_relationship_models.py::test_all_relationship_tables_have_timestamps PASSED
+tests/unit/models/test_relationship_models.py::test_all_relationship_tables_have_foreign_keys PASSED
+tests/unit/models/test_relationship_models.py::test_all_relationship_tables_cascade_delete PASSED
+tests/unit/models/test_relationship_models.py::test_folder_branch_all_columns PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_table_name PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_all_columns_exist PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_user_id_foreign_key PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_vault_file_id_foreign_key PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_reminder_date_column PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_status_column PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_urgency_level_column PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_user_relationship PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_vault_file_relationship PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_repr_method PASSED
+tests/unit/models/test_section_model.py::test_section_table_name PASSED
+tests/unit/models/test_section_model.py::test_section_all_columns_exist PASSED
+tests/unit/models/test_section_model.py::test_section_category_id_foreign_key PASSED
+tests/unit/models/test_section_model.py::test_section_code_column PASSED
+tests/unit/models/test_section_model.py::test_section_sort_index_column PASSED
+tests/unit/models/test_section_model.py::test_section_file_import_default PASSED
+tests/unit/models/test_section_model.py::test_section_category_relationship PASSED
+tests/unit/models/test_section_model.py::test_section_unique_constraint PASSED
+tests/unit/models/test_section_model.py::test_section_repr_method PASSED
+tests/unit/models/test_section_model.py::test_section_cascade_delete PASSED
+tests/unit/models/test_step_model.py::test_step_table_name PASSED
+tests/unit/models/test_step_model.py::test_step_all_columns_exist PASSED
+tests/unit/models/test_step_model.py::test_step_section_id_foreign_key PASSED
+tests/unit/models/test_step_model.py::test_step_title_column PASSED
+tests/unit/models/test_step_model.py::test_step_type_enum PASSED
+tests/unit/models/test_step_model.py::test_step_display_order_column PASSED
+tests/unit/models/test_step_model.py::test_step_mandatory_default_false PASSED
+tests/unit/models/test_step_model.py::test_step_section_relationship PASSED
+tests/unit/models/test_step_model.py::test_step_options_relationship PASSED
+tests/unit/models/test_step_model.py::test_step_unique_constraint PASSED
+tests/unit/models/test_step_model.py::test_step_repr_method PASSED
+tests/unit/models/test_step_model.py::test_step_cascade_delete PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_table_name PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_all_columns_exist PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_user_id_foreign_key PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_contact_id_foreign_key PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_status_enum PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_version_column PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_is_primary_default_false PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_unique_constraint PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_repr_method PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_cascade_delete PASSED
+tests/unit/models/test_user_model.py::test_user_model_table_name PASSED
+tests/unit/models/test_user_model.py::test_user_model_all_columns_exist PASSED
+tests/unit/models/test_user_model.py::test_user_email_column_type PASSED
+tests/unit/models/test_user_model.py::test_user_phone_column_type PASSED
+tests/unit/models/test_user_model.py::test_user_password_column_type PASSED
+tests/unit/models/test_user_model.py::test_user_status_column_enum PASSED
+tests/unit/models/test_user_model.py::test_user_email_unique_constraint PASSED
+tests/unit/models/test_user_model.py::test_user_phone_unique_constraint PASSED
+tests/unit/models/test_user_model.py::test_user_email_nullable PASSED
+tests/unit/models/test_user_model.py::test_user_otp_nullable_true PASSED
+tests/unit/models/test_user_model.py::test_user_relationships_defined PASSED
+tests/unit/models/test_user_model.py::test_user_profile_relationship PASSED
+tests/unit/models/test_user_model.py::test_user_contacts_relationship PASSED
+tests/unit/models/test_user_model.py::test_user_repr_method PASSED
+tests/unit/models/test_user_model.py::test_user_status_enum_values PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_table_name PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_all_columns_exist PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_encrypted_dek_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_encrypted_form_data_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_nonce_form_data_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_template_id_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_owner_user_id_foreign_key PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_creation_mode_check_constraint PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_status_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_has_source_file_default PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_owner_relationship PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_access_list_relationship PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_timestamps PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_repr_method PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_cascade_delete PASSED
+
+---------- coverage: platform linux, python 3.11.14-final-0 ----------
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+config.py                          17      0      0      0   100%
+database.py                         7      0      0      0   100%
+models/__init__.py                 19      0      0      0   100%
+models/admin.py                    13      0      0      0   100%
+models/card.py                     29      0      0      0   100%
+models/category.py                 61      0      0      0   100%
+models/contact.py                  40      0      0      0   100%
+models/death.py                   122      0      0      0   100%
+models/death_approval.py           12      0      0      0   100%
+models/enums.py                    32      0      0      0   100%
+models/file.py                     18      0      0      0   100%
+models/folder.py                   70      0      0      0   100%
+models/memory.py                   48      0      0      0   100%
+models/relationship.py             26      0      0      0   100%
+models/release.py                  19      0      0      0   100%
+models/reminder.py                 44      0      0      0   100%
+models/reminder_preference.py      43      0      0      0   100%
+models/step.py                     52      0      0      0   100%
+models/trustee.py                  17      0      0      0   100%
+models/user.py                     60      4      2      0    90%   58, 63-66
+models/user_forms.py               38      0      0      0   100%
+models/vault.py                    52      0      0      0   100%
+models/verification.py             33      0      0      0   100%
+---------------------------------------------------------------------------
+TOTAL                             872      4      2      0    99%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+
+
+============================= slowest 10 durations =============================
+0.11s call     unit/models/test_admin_model.py::test_admin_repr_method
+0.00s setup    unit/models/test_admin_model.py::test_admin_table_name
+0.00s teardown unit/models/test_admin_model.py::test_admin_table_name
+0.00s call     unit/models/test_vault_file_model.py::test_vault_file_creation_mode_check_constraint
+0.00s setup    unit/models/test_folder_model.py::test_folder_files_relationship
+0.00s setup    unit/models/test_contact_model.py::test_contact_repr_method
+0.00s setup    unit/models/test_admin_model.py::test_admin_otp_verified_default
+0.00s setup    unit/models/test_category_model.py::test_category_table_name
+0.00s setup    unit/models/test_folder_model.py::test_folder_table_name
+0.00s setup    unit/models/test_reminder_model.py::test_reminder_urgency_level_column
+============================= 156 passed in 2.33s ==============================
+
+======================================================================
+PER MODULE RESULTS
+======================================================================
+
+User Model:
+  [==============================] 15/15
+  Passed: 15, Failed: 0, Skipped: 0
+
+Contact Model:
+  [==============================] 12/12
+  Passed: 12, Failed: 0, Skipped: 0
+
+Vault File Model:
+  [==============================] 15/15
+  Passed: 15, Failed: 0, Skipped: 0
+
+Folder Model:
+  [==============================] 12/12
+  Passed: 12, Failed: 0, Skipped: 0
+
+Memory Collection Model:
+  [==============================] 12/12
+  Passed: 12, Failed: 0, Skipped: 0
+
+Death Declaration Model:
+  [==============================] 15/15
+  Passed: 15, Failed: 0, Skipped: 0
+
+Trustee Model:
+  [==============================] 10/10
+  Passed: 10, Failed: 0, Skipped: 0
+
+Category Model:
+  [==============================] 10/10
+  Passed: 10, Failed: 0, Skipped: 0
+
+Section Model:
+  [==============================] 10/10
+  Passed: 10, Failed: 0, Skipped: 0
+
+Step Model:
+  [==============================] 12/12
+  Passed: 12, Failed: 0, Skipped: 0
+
+Reminder Model:
+  [==============================] 10/10
+  Passed: 10, Failed: 0, Skipped: 0
+
+Admin Model:
+  [==============================] 8/8
+  Passed: 8, Failed: 0, Skipped: 0
+
+Relationship Models:
+  [==============================] 15/15
+  Passed: 15, Failed: 0, Skipped: 0
+
+======================================================================
+MODULE 0 SUMMARY
+======================================================================
+
+Progress: [========================================] 156/156 tests
+Result: 156 passed, 0 failed, 0 skipped
+
+======================================================================
+MODULE 1: FOUNDATION - DATABASE MODELS
+======================================================================
+
+Running tests...
+
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-7.4.3, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /home/user/plan_beyond/tests
+configfile: pytest.ini
+plugins: asyncio-0.21.1, anyio-3.7.1, mock-3.12.0, cov-4.1.0
+asyncio: mode=Mode.STRICT
+collecting ... collected 45 items
+
+tests/unit/foundation/test_database_models.py::test_create_user_with_minimal_required_fields ERROR
+tests/unit/foundation/test_database_models.py::test_create_user_with_all_optional_fields ERROR
+tests/unit/foundation/test_database_models.py::test_user_email_unique_constraint_enforced ERROR
+tests/unit/foundation/test_database_models.py::test_user_phone_unique_constraint_enforced ERROR
+tests/unit/foundation/test_database_models.py::test_user_status_enum_validation ERROR/usr/local/lib/python3.11/dist-packages/coverage/inorout.py:530: CoverageWarning: Module app has no Python source. (module-not-python); see https://coverage.readthedocs.io/en/7.11.0/messages.html#warning-module-not-python
+  self.warn(f"Module {pkg} has no Python source.", slug="module-not-python")
+
+
+==================================== ERRORS ====================================
+_______ ERROR at setup of test_create_user_with_minimal_required_fields ________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_________ ERROR at setup of test_create_user_with_all_optional_fields __________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_________ ERROR at setup of test_user_email_unique_constraint_enforced _________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_________ ERROR at setup of test_user_phone_unique_constraint_enforced _________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+______________ ERROR at setup of test_user_status_enum_validation ______________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+---------- coverage: platform linux, python 3.11.14-final-0 ----------
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+config.py                          17      0      0      0   100%
+core/security.py                    6      2      0      0    67%   6, 9
+database.py                         7      0      0      0   100%
+models/__init__.py                 19      0      0      0   100%
+models/admin.py                    13      0      0      0   100%
+models/card.py                     29      0      0      0   100%
+models/category.py                 61      0      0      0   100%
+models/contact.py                  40      0      0      0   100%
+models/death.py                   122      0      0      0   100%
+models/death_approval.py           12      0      0      0   100%
+models/enums.py                    32      0      0      0   100%
+models/file.py                     18      0      0      0   100%
+models/folder.py                   70      0      0      0   100%
+models/memory.py                   48      0      0      0   100%
+models/relationship.py             26      0      0      0   100%
+models/release.py                  19      0      0      0   100%
+models/reminder.py                 44      0      0      0   100%
+models/reminder_preference.py      43      0      0      0   100%
+models/step.py                     52      0      0      0   100%
+models/trustee.py                  17      0      0      0   100%
+models/user.py                     60      4      2      0    90%   58, 63-66
+models/user_forms.py               38      0      0      0   100%
+models/vault.py                    52      0      0      0   100%
+models/verification.py             33      0      0      0   100%
+---------------------------------------------------------------------------
+TOTAL                             878      6      2      0    99%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+
+============================= slowest 10 durations =============================
+0.01s setup    unit/foundation/test_database_models.py::test_create_user_with_minimal_required_fields
+0.00s teardown unit/foundation/test_database_models.py::test_create_user_with_minimal_required_fields
+0.00s setup    unit/foundation/test_database_models.py::test_user_status_enum_validation
+0.00s setup    unit/foundation/test_database_models.py::test_user_phone_unique_constraint_enforced
+0.00s setup    unit/foundation/test_database_models.py::test_create_user_with_all_optional_fields
+0.00s setup    unit/foundation/test_database_models.py::test_user_email_unique_constraint_enforced
+0.00s teardown unit/foundation/test_database_models.py::test_create_user_with_all_optional_fields
+0.00s teardown unit/foundation/test_database_models.py::test_user_status_enum_validation
+0.00s teardown unit/foundation/test_database_models.py::test_user_email_unique_constraint_enforced
+0.00s teardown unit/foundation/test_database_models.py::test_user_phone_unique_constraint_enforced
+=========================== short test summary info ============================
+ERROR tests/unit/foundation/test_database_models.py::test_create_user_with_minimal_required_fields
+ERROR tests/unit/foundation/test_database_models.py::test_create_user_with_all_optional_fields
+ERROR tests/unit/foundation/test_database_models.py::test_user_email_unique_constraint_enforced
+ERROR tests/unit/foundation/test_database_models.py::test_user_phone_unique_constraint_enforced
+ERROR tests/unit/foundation/test_database_models.py::test_user_status_enum_validation
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================== 5 errors in 3.94s ===============================
+
+======================================================================
+MODULE 1 RESULTS
+======================================================================
+
+No tests found
+
+======================================================================
+MODULE 2: AUTH - USER AUTHENTICATION & AUTHORIZATION
+======================================================================
+
+Running tests...
+
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-7.4.3, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /home/user/plan_beyond/tests
+configfile: pytest.ini
+plugins: asyncio-0.21.1, anyio-3.7.1, mock-3.12.0, cov-4.1.0
+asyncio: mode=Mode.STRICT
+collecting ... collected 85 items
+
+tests/unit/auth/test_admin_controller.py::test_create_admin_with_username_email ERROR
+tests/unit/auth/test_admin_controller.py::test_admin_password_hashed_on_save ERROR
+tests/unit/auth/test_admin_controller.py::test_admin_otp_generation ERROR
+tests/unit/auth/test_admin_controller.py::test_get_admin_by_username ERROR
+tests/unit/auth/test_admin_controller.py::test_get_admin_by_email ERROR/usr/local/lib/python3.11/dist-packages/coverage/inorout.py:530: CoverageWarning: Module app has no Python source. (module-not-python); see https://coverage.readthedocs.io/en/7.11.0/messages.html#warning-module-not-python
+  self.warn(f"Module {pkg} has no Python source.", slug="module-not-python")
+
+
+==================================== ERRORS ====================================
+___________ ERROR at setup of test_create_admin_with_username_email ____________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_____________ ERROR at setup of test_admin_password_hashed_on_save _____________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_________________ ERROR at setup of test_admin_otp_generation __________________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_________________ ERROR at setup of test_get_admin_by_username _________________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+__________________ ERROR at setup of test_get_admin_by_email ___________________
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+
+The above exception was the direct cause of the following exception:
+tests/fixtures/database_fixtures.py:74: in test_db_engine
+    with admin_engine.connect() as conn:
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3268: in connect
+    return self._connection_cls(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:147: in __init__
+    Connection._handle_dbapi_exception_noconnection(
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:2430: in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:145: in __init__
+    self._dbapi_connection = engine.raw_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/base.py:3292: in raw_connection
+    return self.pool.connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:452: in connect
+    return _ConnectionFairy._checkout(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:1269: in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:716: in checkout
+    rec = pool._do_get()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/impl.py:284: in _do_get
+    return self._create_connection()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:393: in _create_connection
+    return _ConnectionRecord(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:678: in __init__
+    self.__connect()
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:902: in __connect
+    with util.safe_reraise():
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/util/langhelpers.py:146: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/pool/base.py:898: in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/create.py:637: in connect
+    return dialect.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/sqlalchemy/engine/default.py:616: in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+/usr/local/lib/python3.11/dist-packages/psycopg2/__init__.py:122: in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+E   sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+E   	Is the server running on that host and accepting TCP/IP connections?
+E   
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+---------- coverage: platform linux, python 3.11.14-final-0 ----------
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+config.py                          17      0      0      0   100%
+core/security.py                    6      2      0      0    67%   6, 9
+database.py                         7      0      0      0   100%
+models/__init__.py                 19      0      0      0   100%
+models/admin.py                    13      0      0      0   100%
+models/card.py                     29      0      0      0   100%
+models/category.py                 61      0      0      0   100%
+models/contact.py                  40      0      0      0   100%
+models/death.py                   122      0      0      0   100%
+models/death_approval.py           12      0      0      0   100%
+models/enums.py                    32      0      0      0   100%
+models/file.py                     18      0      0      0   100%
+models/folder.py                   70      0      0      0   100%
+models/memory.py                   48      0      0      0   100%
+models/relationship.py             26      0      0      0   100%
+models/release.py                  19      0      0      0   100%
+models/reminder.py                 44      0      0      0   100%
+models/reminder_preference.py      43      0      0      0   100%
+models/step.py                     52      0      0      0   100%
+models/trustee.py                  17      0      0      0   100%
+models/user.py                     60      4      2      0    90%   58, 63-66
+models/user_forms.py               38      0      0      0   100%
+models/vault.py                    52      0      0      0   100%
+models/verification.py             33      0      0      0   100%
+schemas/__init__.py                 0      0      0      0   100%
+schemas/contact.py                 77     26     14      0    56%   55-82, 88-89
+schemas/user.py                   174     33     16      0    74%   29-43, 69, 73, 77-81, 85, 89-93, 123, 127, 131-135, 138
+---------------------------------------------------------------------------
+TOTAL                            1129     65     32      0    92%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+
+============================= slowest 10 durations =============================
+0.01s setup    unit/auth/test_admin_controller.py::test_create_admin_with_username_email
+0.00s teardown unit/auth/test_admin_controller.py::test_create_admin_with_username_email
+0.00s setup    unit/auth/test_admin_controller.py::test_get_admin_by_email
+0.00s teardown unit/auth/test_admin_controller.py::test_admin_otp_generation
+0.00s setup    unit/auth/test_admin_controller.py::test_get_admin_by_username
+0.00s setup    unit/auth/test_admin_controller.py::test_admin_otp_generation
+0.00s setup    unit/auth/test_admin_controller.py::test_admin_password_hashed_on_save
+0.00s teardown unit/auth/test_admin_controller.py::test_admin_password_hashed_on_save
+0.00s teardown unit/auth/test_admin_controller.py::test_get_admin_by_email
+0.00s teardown unit/auth/test_admin_controller.py::test_get_admin_by_username
+=========================== short test summary info ============================
+ERROR tests/unit/auth/test_admin_controller.py::test_create_admin_with_username_email
+ERROR tests/unit/auth/test_admin_controller.py::test_admin_password_hashed_on_save
+ERROR tests/unit/auth/test_admin_controller.py::test_admin_otp_generation - s...
+ERROR tests/unit/auth/test_admin_controller.py::test_get_admin_by_username - ...
+ERROR tests/unit/auth/test_admin_controller.py::test_get_admin_by_email - sql...
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================== 5 errors in 5.50s ===============================
+
+======================================================================
+MODULE 2 RESULTS
+======================================================================
+
+======================================================================
+MODULE 2 SUMMARY
+======================================================================
+
+No tests found
+
+======================================================================
+OVERALL SUMMARY - ALL MODULES
+======================================================================
+
+[OK] Module 0: ORM Models:
+  Passed: 156, Failed: 0, Skipped: 0, Total: 156
+
+[OK] Module 1: Foundation - Database Models:
+  Passed: 0, Failed: 0, Skipped: 0, Total: 0
+
+[OK] Module 2: Auth:
+  Passed: 0, Failed: 0, Skipped: 0, Total: 0
+
+======================================================================
+OVERALL RESULTS
+======================================================================
+
+Progress: [========================================] 156/156 tests
+
+Result: 156 passed, 0 failed, 0 skipped
+Total:  156 tests
+
+[OK] Counts tally correctly: 156 + 0 + 0 = 156
+
+======================================================================
+PROGRESS TOWARDS COMPLETE TEST SUITE
+======================================================================
+
+[OK] Module 0 (ORM Models):        156/156 tests
+[OK] Module 1 (Foundation):        0/102 tests (database models only)
+     Module 1 Remaining:           102 tests
+[OK] Module 2 (Auth):              0/130 tests (unit tests only)
+     Module 2 Remaining:           130 tests (integration tests)
+     Modules 3-12:                 1,257 tests
+
+Total Completed:               156/1,644 tests
+Completion:                    9.5%
+======================================================================

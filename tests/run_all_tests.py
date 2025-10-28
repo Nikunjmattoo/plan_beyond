@@ -21,14 +21,16 @@ def create_progress_bar(current, total, width=40):
 
 
 def parse_pytest_verbose_output(output):
-    """Parse pytest -v output to get per-file results"""
+    """Parse pytest -v output to get per-file results and bug tracking"""
     lines = output.split('\n')
 
     # Track results per file
     file_results = {}
     bugs_found = []
+    bug_details = {}  # Map bug number to {test_name, title, line_info}
+    current_test = None
 
-    for line in lines:
+    for i, line in enumerate(lines):
         # Match test execution lines: "tests/unit/models/test_user_model.py::test_name PASSED"
         if '::' in line and ('PASSED' in line or 'FAILED' in line or 'SKIPPED' in line):
             parts = line.split('::')
@@ -37,8 +39,12 @@ def parse_pytest_verbose_output(output):
                 # Extract just the filename
                 filename = Path(file_path).name
 
+                # Extract test name
+                test_name_part = parts[1].split(' ')[0].strip()
+                current_test = test_name_part
+
                 if filename not in file_results:
-                    file_results[filename] = {'passed': 0, 'failed': 0, 'skipped': 0}
+                    file_results[filename] = {'passed': 0, 'failed': 0, 'skipped': 0, 'bugs': []}
 
                 if 'PASSED' in line:
                     file_results[filename]['passed'] += 1
@@ -56,7 +62,14 @@ def parse_pytest_verbose_output(output):
                 bug_id = f"Bug #{bug_num}: {bug_title}" if bug_title else f"Bug #{bug_num}"
                 bugs_found.append(bug_id)
 
-    return file_results, bugs_found
+                # Store bug details with test name
+                bug_details[bug_num] = {
+                    'title': bug_title,
+                    'test': current_test,
+                    'full_id': bug_id
+                }
+
+    return file_results, bugs_found, bug_details
 
 
 def run_module(module_name, test_path, project_root):
@@ -99,9 +112,9 @@ def run_module(module_name, test_path, project_root):
     output = ''.join(output_lines)
 
     # Parse output for test results and bugs
-    file_results, bugs_found = parse_pytest_verbose_output(output)
+    file_results, bugs_found, bug_details = parse_pytest_verbose_output(output)
 
-    return file_results, bugs_found, output
+    return file_results, bugs_found, bug_details, output
 
 
 def main():
@@ -115,12 +128,13 @@ def main():
     # Track overall results
     all_results = []
     all_bugs = []
+    all_bug_details = {}  # Track which tests found which bugs
 
     # ======================================================================
     # MODULE 0: ORM MODELS (156 tests)
     # ======================================================================
 
-    file_results, bugs, output = run_module(
+    file_results, bugs, bug_details, output = run_module(
         "MODULE 0: ORM MODEL TEST SUITE",
         "tests/unit/models/",
         project_root
@@ -176,12 +190,13 @@ def main():
 
     all_results.append(('Module 0: ORM Models', module0_results))
     all_bugs.extend(bugs)
+    all_bug_details.update(bug_details)
 
     # ======================================================================
     # MODULE 1: FOUNDATION - DATABASE MODELS (45 tests)
     # ======================================================================
 
-    file_results, bugs, output = run_module(
+    file_results, bugs, bug_details, output = run_module(
         "MODULE 1: FOUNDATION - DATABASE MODELS",
         "tests/unit/foundation/test_database_models.py",
         project_root
@@ -209,12 +224,13 @@ def main():
 
     all_results.append(('Module 1: Foundation - Database Models', module1_results))
     all_bugs.extend(bugs)
+    all_bug_details.update(bug_details)
 
     # ======================================================================
     # MODULE 2: AUTH (85 tests)
     # ======================================================================
 
-    file_results, bugs, output = run_module(
+    file_results, bugs, bug_details, output = run_module(
         "MODULE 2: AUTH - USER AUTHENTICATION & AUTHORIZATION",
         "tests/unit/auth/",
         project_root
@@ -266,6 +282,7 @@ def main():
 
     all_results.append(('Module 2: Auth', module2_results))
     all_bugs.extend(bugs)
+    all_bug_details.update(bug_details)
 
     # ======================================================================
     # OVERALL SUMMARY
@@ -278,7 +295,7 @@ def main():
     overall = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
 
     for module_name, results in all_results:
-        status = "✓" if results['failed'] == 0 else "✗"
+        status = "[OK]" if results['failed'] == 0 else "[FAIL]"
         print(f"\n{status} {module_name}:")
         print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}, Total: {results['total']}")
 
@@ -301,31 +318,48 @@ def main():
     # Verify counts tally
     calculated_total = overall['passed'] + overall['failed'] + overall['skipped']
     if calculated_total == overall['total']:
-        print(f"\n✓ Counts tally correctly: {overall['passed']} + {overall['failed']} + {overall['skipped']} = {overall['total']}")
+        print(f"\n[OK] Counts tally correctly: {overall['passed']} + {overall['failed']} + {overall['skipped']} = {overall['total']}")
     else:
-        print(f"\n✗ WARNING: Counts don't tally: {overall['passed']} + {overall['failed']} + {overall['skipped']} ≠ {overall['total']}")
+        print(f"\n[!] WARNING: Counts don't tally: {overall['passed']} + {overall['failed']} + {overall['skipped']} != {overall['total']}")
 
     # Production bugs found
     if all_bugs:
         print("\n" + "="*70)
-        print("🔥 PRODUCTION BUGS DISCOVERED")
+        print("[!] PRODUCTION BUGS DISCOVERED")
         print("="*70)
-        unique_bugs = list(set(all_bugs))
-        print(f"\nTotal bugs found: {len(unique_bugs)}")
+        unique_bugs = sorted(list(set(all_bugs)))
+        print(f"\nTotal bugs found: {len(unique_bugs)}\n")
+
+        # Show each bug with the test that found it
         for bug in unique_bugs:
             print(f"  - {bug}")
-        print("\nSee test output above for bug details.")
+            # Find which test discovered this bug
+            bug_num = bug.split('#')[1].split(':')[0].strip()
+            if bug_num in all_bug_details:
+                detail = all_bug_details[bug_num]
+                if detail['test']:
+                    print(f"    Found by test: {detail['test']}")
+
+        print("\n" + "="*70)
+        print("See detailed bug reports in test output above.")
+        print("="*70)
 
     # Progress toward complete test suite
     print("\n" + "="*70)
     print("PROGRESS TOWARDS COMPLETE TEST SUITE")
     print("="*70)
-    print(f"\n✓ Module 0 (ORM Models):        156/156 tests")
-    print(f"✓ Module 1 (Foundation):        45/102 tests (database models only)")
-    print(f"  Module 1 Remaining:           57 tests")
-    print(f"✓ Module 2 (Auth):              85/130 tests (unit tests only)")
-    print(f"  Module 2 Remaining:           45 tests (integration tests)")
-    print(f"  Modules 3-12:                 1,257 tests")
+
+    # Calculate actual counts from results
+    module0_count = all_results[0][1]['total'] if len(all_results) > 0 else 0
+    module1_count = all_results[1][1]['total'] if len(all_results) > 1 else 0
+    module2_count = all_results[2][1]['total'] if len(all_results) > 2 else 0
+
+    print(f"\n[OK] Module 0 (ORM Models):        {module0_count}/156 tests")
+    print(f"[OK] Module 1 (Foundation):        {module1_count}/102 tests (database models only)")
+    print(f"     Module 1 Remaining:           {102 - module1_count} tests")
+    print(f"[OK] Module 2 (Auth):              {module2_count}/130 tests (unit tests only)")
+    print(f"     Module 2 Remaining:           {130 - module2_count} tests (integration tests)")
+    print(f"     Modules 3-12:                 1,257 tests")
     print(f"\nTotal Completed:               {overall['total']}/1,644 tests")
     completion_pct = (overall['total'] / 1644) * 100
     print(f"Completion:                    {completion_pct:.1f}%")

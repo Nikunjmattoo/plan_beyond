@@ -12,7 +12,6 @@ from app.models.user import User, UserStatus
 from app.models.admin import Admin
 from app.schemas.user import VerificationSubmit
 from app.core.security import hash_password
-from tests.helpers.bug_reporter import report_production_bug
 
 
 # ==============================================
@@ -193,26 +192,13 @@ def test_submit_verification_creates_history_entry(db_session):
 
     verification = submit_verification(db_session, user.id, verification_data)
 
-    # Check if history entry was created
+    # Assert - History entry should be created
     history = db_session.query(UserStatusHistory).filter(
         UserStatusHistory.user_id == user.id
     ).first()
 
-    # NOTE: If this fails, it means history tracking is not implemented yet
-    # This would be a PRODUCTION BUG: No audit trail!
-    if history is None:
-        report_production_bug(
-            bug_number=2,
-            title="No Status History Tracking",
-            issue="Verification submissions don't create UserStatusHistory entries",
-            impact="No audit trail of user status changes - compliance and debugging nightmare",
-            fix="Create UserStatusHistory entry whenever verification status changes",
-            location="controller/verification.py - submit_verification()"
-        )
-        # FAIL the test - production bug found
-        assert False, "PRODUCTION BUG #2: No Status History Tracking"
-    else:
-        assert history.user_id == user.id
+    assert history is not None
+    assert history.user_id == user.id
 
 
 # ==============================================

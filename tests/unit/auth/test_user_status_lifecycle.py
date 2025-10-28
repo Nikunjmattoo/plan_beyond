@@ -9,7 +9,6 @@ from datetime import datetime
 
 from app.models.user import User, UserStatus
 from app.models.verification import UserStatusHistory
-from tests.helpers.bug_reporter import report_production_bug
 
 
 # ==============================================
@@ -142,25 +141,12 @@ def test_cannot_skip_states(db_session):
     # Try to skip from unknown directly to verified (bypassing guest)
     # In a proper system, this should be prevented by validation logic
 
-    user.status = UserStatus.verified  # Skip guest state
+    user.status = UserStatus.verified  # Try to skip guest state
     db_session.commit()
     db_session.refresh(user)
 
-    # If this succeeds, we may have a PRODUCTION BUG: No state transition validation
-    # The database allows it, but application logic should enforce order
-    if user.status == UserStatus.verified:
-        report_production_bug(
-            bug_number=6,
-            title="Status Transition Validation Missing",
-            issue="Users can skip states (unknown -> verified, bypassing guest state)",
-            impact="Users bypass critical verification steps, security compromise",
-            fix="Add state machine validation: only allow unknown->guest->verified->member transitions",
-            location="User status update code - needs transition validation logic"
-        )
-        # FAIL the test - production bug found
-        assert False, "PRODUCTION BUG #6: Status Transition Validation Missing"
-    else:
-        assert user.status == UserStatus.unknown  # Should be rejected
+    # Assert - Status should be rejected (cannot skip states)
+    assert user.status == UserStatus.unknown
 
 
 # ==============================================

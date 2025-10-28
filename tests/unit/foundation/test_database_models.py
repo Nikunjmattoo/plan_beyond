@@ -12,7 +12,6 @@ from app.models.contact import Contact
 from app.models.admin import Admin
 from app.models.vault import VaultFile
 from app.core.security import hash_password
-from tests.helpers.bug_reporter import report_production_bug
 
 
 # ==============================================
@@ -597,29 +596,9 @@ def test_user_email_case_sensitivity(db_session):
     )
     db_session.add(user2)
 
-    # This test reveals if email case handling is correct
-    # If it allows both, there's a bug - emails should be case-insensitive
-    try:
+    # Act & Assert - Should raise IntegrityError for duplicate email (case-insensitive)
+    with pytest.raises(IntegrityError):
         db_session.commit()
-        # If we get here, emails are case-sensitive (BUG FOUND!)
-        report_production_bug(
-            bug_number=1,
-            title="Email Case Sensitivity",
-            issue="Database allows duplicate emails with different cases (test@example.com and Test@example.com)",
-            impact="Users can create duplicate accounts bypassing uniqueness constraint",
-            fix="Use CITEXT column type OR normalize emails to lowercase before saving",
-            location="models/user.py - email column definition"
-        )
-        # Clean up both users
-        db_session.delete(user2)
-        db_session.delete(user1)
-        db_session.commit()
-        # FAIL the test - production bug found
-        assert False, "PRODUCTION BUG #1: Email Case Sensitivity"
-    except IntegrityError:
-        # Good! Database enforces uniqueness regardless of case
-        db_session.rollback()
-        assert True
 
 
 # ==============================================

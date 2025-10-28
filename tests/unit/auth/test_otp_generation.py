@@ -10,7 +10,6 @@ import random
 import string
 
 from app.models.user import User, UserStatus
-from tests.helpers.bug_reporter import report_production_bug
 
 
 # ==============================================
@@ -69,19 +68,9 @@ def test_generate_otp_randomness(db_session):
     # Getting 200 unique from 200 attempts is very likely if random
     uniqueness_pct = (len(unique_otps) / len(otps)) * 100
 
+    # Assert - At least 85% of OTPs should be unique (ensures randomness)
     assert uniqueness_pct > 85, f"Only {uniqueness_pct:.1f}% unique OTPs - not random enough!"
-
-    # If all OTPs are identical, we have a CRITICAL security bug!
-    if len(unique_otps) == 1:
-        report_production_bug(
-            bug_number=4,
-            title="OTP Generation Not Random",
-            issue=f"All OTPs are identical: {list(unique_otps)[0]} - no randomness!",
-            impact="CRITICAL SECURITY - Attacker can predict all OTPs and bypass authentication",
-            fix="Use secrets.randbelow() or random.SystemRandom() instead of random.choice()",
-            location="OTP generation code - likely using non-cryptographic random"
-        )
-        assert False, "OTP generation is broken!"
+    assert len(unique_otps) > 1, "All OTPs are identical - no randomness!"
 
 
 # ==============================================
@@ -195,20 +184,8 @@ def test_expired_otp_rejected(db_session):
     # Check if OTP is expired
     is_expired = user.otp_expires_at < datetime.utcnow()
 
+    # Assert - OTP should be expired
     assert is_expired is True, "OTP should be expired"
-
-    # Verification should fail for expired OTP
-    # This test documents the expected behavior
-    if not is_expired:
-        report_production_bug(
-            bug_number=5,
-            title="Expired OTP Accepted",
-            issue="System accepts OTPs past their expiry time",
-            impact="CRITICAL SECURITY - Old OTPs can be reused indefinitely, enabling replay attacks",
-            fix="Check if otp_expires_at < datetime.utcnow() before accepting OTP",
-            location="OTP verification endpoint - missing expiry check"
-        )
-        assert False, "Expired OTP was accepted!"
 
 
 # ==============================================

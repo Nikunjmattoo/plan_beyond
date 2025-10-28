@@ -1,7 +1,7 @@
 """
 Module 2: Auth - User Status Lifecycle Tests (Tests 349-358)
 
-Tests user status transitions (unknown → guest → verified → member)
+Tests user status transitions (unknown -> guest -> verified -> member)
 and status history tracking.
 """
 import pytest
@@ -42,7 +42,7 @@ def test_new_user_starts_as_unknown(db_session):
 @pytest.mark.critical
 def test_unknown_to_guest_after_otp_verify(db_session):
     """
-    Test #350: User transitions from unknown → guest after OTP verification
+    Test #350: User transitions from unknown -> guest after OTP verification
     """
     user = User(
         email="otpuser@example.com",
@@ -71,7 +71,7 @@ def test_unknown_to_guest_after_otp_verify(db_session):
 @pytest.mark.critical
 def test_guest_to_verified_after_document_approval(db_session):
     """
-    Test #351: User transitions from guest → verified after document approval
+    Test #351: User transitions from guest -> verified after document approval
     """
     user = User(
         email="guestuser@example.com",
@@ -95,7 +95,7 @@ def test_guest_to_verified_after_document_approval(db_session):
 @pytest.mark.critical
 def test_verified_to_member_after_profile_complete(db_session):
     """
-    Test #352: User transitions from verified → member after completing profile
+    Test #352: User transitions from verified -> member after completing profile
     """
     user = User(
         email="verifieduser@example.com",
@@ -127,7 +127,7 @@ def test_verified_to_member_after_profile_complete(db_session):
 @pytest.mark.critical
 def test_cannot_skip_states(db_session):
     """
-    Test #353: Users cannot skip states (e.g., unknown → verified)
+    Test #353: Users cannot skip states (e.g., unknown -> verified)
     NOTE: This test documents expected behavior - enforcement may not exist yet
     """
     user = User(
@@ -152,9 +152,9 @@ def test_cannot_skip_states(db_session):
         report_production_bug(
             bug_number=6,
             title="Status Transition Validation Missing",
-            issue="Users can skip states (unknown → verified, bypassing guest state)",
+            issue="Users can skip states (unknown -> verified, bypassing guest state)",
             impact="Users bypass critical verification steps, security compromise",
-            fix="Add state machine validation: only allow unknown→guest→verified→member transitions",
+            fix="Add state machine validation: only allow unknown->guest->verified->member transitions",
             location="User status update code - needs transition validation logic"
         )
         # Pass test to continue finding other bugs
@@ -284,7 +284,7 @@ def test_multiple_transitions_create_history_chain(db_session):
     db_session.add(user)
     db_session.commit()
 
-    # Transition 1: unknown → guest
+    # Transition 1: unknown -> guest
     history1 = UserStatusHistory(
         user_id=user.id,
         from_status="unknown",
@@ -295,7 +295,7 @@ def test_multiple_transitions_create_history_chain(db_session):
     user.status = UserStatus.guest
     db_session.commit()
 
-    # Transition 2: guest → verified
+    # Transition 2: guest -> verified
     history2 = UserStatusHistory(
         user_id=user.id,
         from_status="guest",
@@ -306,7 +306,7 @@ def test_multiple_transitions_create_history_chain(db_session):
     user.status = UserStatus.verified
     db_session.commit()
 
-    # Transition 3: verified → member
+    # Transition 3: verified -> member
     history3 = UserStatusHistory(
         user_id=user.id,
         from_status="verified",

@@ -508,7 +508,7 @@ def test_generate_otp_different_each_call(db_session):
 @pytest.mark.critical
 def test_transition_unknown_to_guest(db_session):
     """
-    Test #296: User can transition from unknown → guest
+    Test #296: User can transition from unknown -> guest
     """
     user_data = UserCreate(
         display_name="Transition User",
@@ -531,7 +531,7 @@ def test_transition_unknown_to_guest(db_session):
 @pytest.mark.critical
 def test_transition_guest_to_verified(db_session):
     """
-    Test #297: User can transition from guest → verified
+    Test #297: User can transition from guest -> verified
     """
     user_data = UserCreate(
         display_name="Guest User",
@@ -554,7 +554,7 @@ def test_transition_guest_to_verified(db_session):
 @pytest.mark.critical
 def test_transition_verified_to_member(db_session):
     """
-    Test #298: User can transition from verified → member
+    Test #298: User can transition from verified -> member
     """
     user_data = UserCreate(
         display_name="Verified User",

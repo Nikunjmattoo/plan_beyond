@@ -57,7 +57,7 @@ def parse_pytest_verbose_output(output):
 
 
 def run_module(module_name, test_path, project_root):
-    """Run tests for a specific module"""
+    """Run tests for a specific module with LIVE progress"""
     print("\n" + "="*70)
     print(f"{module_name}")
     print("="*70)
@@ -70,9 +70,18 @@ def run_module(module_name, test_path, project_root):
         '-p', 'no:warnings'
     ]
 
-    print(f"\nRunning tests...")
+    print(f"\nRunning tests...\n")
 
+    # Run with live output streaming
     result = subprocess.run(
+        cmd,
+        capture_output=False,  # Stream output to terminal in real-time
+        text=True,
+        cwd=project_root
+    )
+
+    # Run again to capture output for parsing (quick since pytest caches)
+    result_capture = subprocess.run(
         cmd,
         capture_output=True,
         text=True,
@@ -80,7 +89,7 @@ def run_module(module_name, test_path, project_root):
     )
 
     # Parse output
-    output = result.stdout + result.stderr
+    output = result_capture.stdout + result_capture.stderr
     file_results, bugs_found = parse_pytest_verbose_output(output)
 
     return file_results, bugs_found, output
@@ -193,6 +202,63 @@ def main():
     all_bugs.extend(bugs)
 
     # ======================================================================
+    # MODULE 2: AUTH (85 tests)
+    # ======================================================================
+
+    file_results, bugs, output = run_module(
+        "MODULE 2: AUTH - USER AUTHENTICATION & AUTHORIZATION",
+        "tests/unit/auth/",
+        project_root
+    )
+
+    # Expected Auth test files
+    auth_files = [
+        ('test_user_controller.py', 'User Controller'),
+        ('test_admin_controller.py', 'Admin Controller'),
+        ('test_verification_controller.py', 'Verification Controller'),
+        ('test_contact_controller.py', 'Contact Controller'),
+        ('test_otp_generation.py', 'OTP Generation'),
+        ('test_user_status_lifecycle.py', 'User Status Lifecycle'),
+    ]
+
+    print("\n" + "="*70)
+    print("MODULE 2 RESULTS")
+    print("="*70)
+
+    module2_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
+
+    for filename, module_name in auth_files:
+        if filename in file_results:
+            results = file_results[filename]
+
+            total = results['passed'] + results['failed'] + results['skipped']
+            progress = create_progress_bar(results['passed'], total, width=30)
+
+            print(f"\n{module_name}:")
+            print(f"  {progress} {results['passed']}/{total}")
+            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
+
+            module2_results['passed'] += results['passed']
+            module2_results['failed'] += results['failed']
+            module2_results['skipped'] += results['skipped']
+
+    module2_results['total'] = module2_results['passed'] + module2_results['failed'] + module2_results['skipped']
+
+    print("\n" + "="*70)
+    print("MODULE 2 SUMMARY")
+    print("="*70)
+
+    if module2_results['total'] > 0:
+        progress = create_progress_bar(module2_results['passed'], module2_results['total'])
+        print(f"\nProgress: {progress} {module2_results['passed']}/{module2_results['total']} tests")
+        print(f"Result: {module2_results['passed']} passed, {module2_results['failed']} failed, {module2_results['skipped']} skipped")
+    else:
+        print("\nNo tests found")
+
+    all_results.append(('Module 2: Auth', module2_results))
+    all_bugs.extend(bugs)
+
+    # ======================================================================
     # OVERALL SUMMARY
     # ======================================================================
 
@@ -248,7 +314,9 @@ def main():
     print(f"\n✓ Module 0 (ORM Models):        156/156 tests")
     print(f"✓ Module 1 (Foundation):        45/102 tests (database models only)")
     print(f"  Module 1 Remaining:           57 tests")
-    print(f"  Modules 2-12:                 1,387 tests")
+    print(f"✓ Module 2 (Auth):              85/130 tests (unit tests only)")
+    print(f"  Module 2 Remaining:           45 tests (integration tests)")
+    print(f"  Modules 3-12:                 1,257 tests")
     print(f"\nTotal Completed:               {overall['total']}/1,644 tests")
     completion_pct = (overall['total'] / 1644) * 100
     print(f"Completion:                    {completion_pct:.1f}%")

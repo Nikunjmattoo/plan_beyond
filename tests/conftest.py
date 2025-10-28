@@ -44,6 +44,9 @@ _running_orm_tests = any('tests/unit/models' in arg or 'tests\\unit\\models' in 
 # Detect if running foundation tests - they need database fixtures but not full app
 _running_foundation_tests = any('tests/unit/foundation' in arg or 'tests\\unit\\foundation' in arg for arg in sys.argv)
 
+# Detect if running auth tests - they need database fixtures but not full app
+_running_auth_tests = any('tests/unit/auth' in arg or 'tests\\unit\\auth' in arg for arg in sys.argv)
+
 # Configure loading based on test type
 if _running_orm_tests:
     # ORM tests: No app, no fixtures (they have their own minimal conftest)
@@ -51,8 +54,8 @@ if _running_orm_tests:
     app = None
     get_db = None
     pytest_plugins = []
-elif _running_foundation_tests:
-    # Foundation tests: No app, but NEED database fixtures
+elif _running_foundation_tests or _running_auth_tests:
+    # Foundation/Auth tests: No app, but NEED database fixtures
     TestClient = None
     app = None
     get_db = None

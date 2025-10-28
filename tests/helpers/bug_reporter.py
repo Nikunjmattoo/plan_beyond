@@ -38,7 +38,7 @@ def report_production_bug(
     separator = "=" * 70
 
     print(f"\n{separator}")
-    print(f"🔥 PRODUCTION BUG #{bug_number}: {title}")
+    print(f"[!] PRODUCTION BUG #{bug_number}: {title}")
     print(separator)
     print(f"Issue:    {issue}")
     print(f"Impact:   {impact}")
@@ -67,7 +67,7 @@ def report_test_bug(title: str, issue: str, fix: str):
     separator = "=" * 70
 
     print(f"\n{separator}")
-    print(f"🐛 TEST BUG: {title}")
+    print(f"[!] TEST BUG: {title}")
     print(separator)
     print(f"Issue: {issue}")
     print(f"Fix:   {fix}")
@@ -100,7 +100,7 @@ def document_expected_behavior(
     separator = "=" * 70
 
     print(f"\n{separator}")
-    print(f"📋 EXPECTED BEHAVIOR: {feature}")
+    print(f"[i] EXPECTED BEHAVIOR: {feature}")
     print(separator)
     print(f"Current:  {current_behavior}")
     print(f"Expected: {expected_behavior}")

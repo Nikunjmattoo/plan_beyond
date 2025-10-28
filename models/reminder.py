@@ -1,16 +1,16 @@
 # app/models/reminder.py
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, DateTime, Date, Text
 from sqlalchemy.orm import relationship
-from app.database import Base
+from app.database import Base, CompatibleUUID
 from datetime import datetime
 import uuid
 from sqlalchemy.dialects.postgresql import UUID
 
 class Reminder(Base):
     __tablename__ = "reminders"
-    
+
     # Primary Key
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(CompatibleUUID, primary_key=True, default=uuid.uuid4)
     
     # Foreign Keys
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=False)

@@ -3,7 +3,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.postgresql import ARRAY
 import enum
-from app.database import Base
+from app.database import Base, CompatibleArray
 
 class DeathAck(Base):
     __tablename__ = "death_ack"
@@ -73,7 +73,7 @@ class DeathDeclaration(Base):
     declared_by_contact_id = Column(Integer, ForeignKey("contacts.id", ondelete="SET NULL"), nullable=True)
 
     message = Column(Text, nullable=True)
-    media_ids = Column(ARRAY(Integer), nullable=True)
+    media_ids = Column(CompatibleArray, nullable=True)
     evidence_file_id = Column(Integer, nullable=True)
     note = Column(Text, nullable=True)
 
@@ -122,7 +122,7 @@ class Broadcast(Base):
     type = Column(Enum(BroadcastType), nullable=False)
     root_user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=False)
     audience_config_json = Column(Text, nullable=True)
-    channels = Column(ARRAY(String), nullable=False)  # e.g. ["email","sms","inapp"]
+    channels = Column(CompatibleArray, nullable=False)  # e.g. ["email","sms","inapp"]
     content = Column(Text, nullable=False)
     llm_safety_result = Column(Enum(LLMSafetyCheck), default=LLMSafetyCheck.pending, nullable=False)
     state = Column(Enum(BroadcastState), default=BroadcastState.queued, nullable=False)

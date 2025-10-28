@@ -73,12 +73,12 @@ def test_db_engine():
         # Drop test database if it exists (cleanup from previous failed run)
         with admin_engine.connect() as conn:
             conn.execute(text(f"DROP DATABASE IF EXISTS {test_db_name}"))
-            print(f"\n✓ Cleaned up any existing test database: {test_db_name}")
+            print(f"\n[OK] Cleaned up any existing test database: {test_db_name}")
 
         # Create test database
         with admin_engine.connect() as conn:
             conn.execute(text(f"CREATE DATABASE {test_db_name}"))
-            print(f"✓ Created test database: {test_db_name}")
+            print(f"[OK] Created test database: {test_db_name}")
 
         admin_engine.dispose()
 
@@ -91,7 +91,7 @@ def test_db_engine():
 
         # Create all tables in test database
         Base.metadata.create_all(bind=test_engine)
-        print(f"✓ Created all tables in test database")
+        print(f"[OK] Created all tables in test database")
 
     else:
         # SQLite fallback (in-memory)
@@ -134,7 +134,7 @@ def test_db_engine():
 
             # Drop test database
             conn.execute(text(f"DROP DATABASE IF EXISTS {test_db_name}"))
-            print(f"\n✓ Dropped test database: {test_db_name}")
+            print(f"\n[OK] Dropped test database: {test_db_name}")
 
         admin_engine.dispose()
     else:

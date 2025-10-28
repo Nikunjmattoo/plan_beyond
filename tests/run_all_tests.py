@@ -57,7 +57,7 @@ def parse_pytest_verbose_output(output):
 
 
 def run_module(module_name, test_path, project_root):
-    """Run tests for a specific module with LIVE progress"""
+    """Run tests for a specific module with LIVE progress and bug detection"""
     print("\n" + "="*70)
     print(f"{module_name}")
     print("="*70)
@@ -67,29 +67,35 @@ def run_module(module_name, test_path, project_root):
         test_path,
         '-v',
         '--tb=short',
-        '-p', 'no:warnings'
+        '-p', 'no:warnings',
+        '-s'  # Don't capture stdout - allows print() statements to show
     ]
 
     print(f"\nRunning tests...\n")
 
-    # Run with live output streaming
-    result = subprocess.run(
+    # Run with real-time output capture
+    process = subprocess.Popen(
         cmd,
-        capture_output=False,  # Stream output to terminal in real-time
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
         text=True,
-        cwd=project_root
+        cwd=project_root,
+        bufsize=1  # Line buffered
     )
 
-    # Run again to capture output for parsing (quick since pytest caches)
-    result_capture = subprocess.run(
-        cmd,
-        capture_output=True,
-        text=True,
-        cwd=project_root
-    )
+    # Capture output while displaying it live
+    output_lines = []
+    for line in iter(process.stdout.readline, ''):
+        if line:
+            print(line, end='')  # Print immediately (live progress)
+            output_lines.append(line)  # Save for parsing
 
-    # Parse output
-    output = result_capture.stdout + result_capture.stderr
+    process.wait()
+
+    # Combine all output
+    output = ''.join(output_lines)
+
+    # Parse output for test results and bugs
     file_results, bugs_found = parse_pytest_verbose_output(output)
 
     return file_results, bugs_found, output

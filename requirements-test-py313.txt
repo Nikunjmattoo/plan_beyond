@@ -1,0 +1,24 @@
+# Test requirements with Python 3.13 compatible versions
+# These versions have pre-built wheels for Python 3.13 (no Rust compiler needed)
+
+# Testing
+pytest==8.3.4
+pytest-cov==6.0.0
+pytest-mock==3.14.0
+pytest-asyncio==0.24.0
+
+# Database
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.10
+
+# Configuration & Validation (UPDATED for Python 3.13)
+pydantic==2.10.3  # Has Python 3.13 wheels
+pydantic-settings==2.7.0
+
+# Security (for password hashing)
+passlib[bcrypt]==1.7.4
+bcrypt==4.2.1  # Updated for Python 3.13
+
+# FastAPI (if needed - has Python 3.13 wheels)
+fastapi==0.115.6
+python-jose[cryptography]==3.3.0

@@ -311,6 +311,171 @@ def main():
     all_results.append(('Module 3: Vault & Encryption', module3_results))
 
     # ======================================================================
+    # MODULE 4: CATEGORIES (107 tests)
+    # ======================================================================
+
+    file_results, output = run_module(
+        "MODULE 4: CATEGORIES - CATEGORY SYSTEM",
+        "tests/unit/categories/",
+        project_root
+    )
+
+    # Expected Categories test files
+    categories_files = [
+        ('test_category_controller.py', 'Category Controller'),
+        ('test_section_controller.py', 'Section Controller'),
+        ('test_step_controller.py', 'Step Controller'),
+        ('test_leaf_assignment_controller.py', 'Leaf Assignment Controller'),
+        ('test_user_answers_controller.py', 'User Answers Controller'),
+        ('test_token_generation.py', 'Token Generation'),
+        ('test_release_formatting.py', 'Release Formatting'),
+    ]
+
+    print("\n" + "="*70)
+    print("MODULE 4 RESULTS")
+    print("="*70)
+
+    module4_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
+
+    for filename, module_name in categories_files:
+        if filename in file_results:
+            results = file_results[filename]
+
+            total = results['passed'] + results['failed'] + results['skipped']
+            progress = create_progress_bar(results['passed'], total, width=30)
+
+            print(f"\n{module_name}:")
+            print(f"  {progress} {results['passed']}/{total}")
+            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
+
+            module4_results['passed'] += results['passed']
+            module4_results['failed'] += results['failed']
+            module4_results['skipped'] += results['skipped']
+
+    module4_results['total'] = module4_results['passed'] + module4_results['failed'] + module4_results['skipped']
+
+    print("\n" + "="*70)
+    print("MODULE 4 SUMMARY")
+    print("="*70)
+
+    if module4_results['total'] > 0:
+        progress = create_progress_bar(module4_results['passed'], module4_results['total'])
+        print(f"\nProgress: {progress} {module4_results['passed']}/{module4_results['total']} tests")
+        print(f"Result: {module4_results['passed']} passed, {module4_results['failed']} failed, {module4_results['skipped']} skipped")
+    else:
+        print("\nNo tests found")
+
+    all_results.append(('Module 4: Categories', module4_results))
+
+    # ======================================================================
+    # MODULE 5: FOLDERS (90 tests)
+    # ======================================================================
+
+    file_results, output = run_module(
+        "MODULE 5: FOLDERS - FOLDER MANAGEMENT",
+        "tests/unit/folders/",
+        project_root
+    )
+
+    # Expected Folders test files
+    folders_files = [
+        ('test_folder_controller.py', 'Folder Controller'),
+        ('test_folder_branches.py', 'Folder Branches'),
+        ('test_folder_leaves.py', 'Folder Leaves'),
+        ('test_folder_triggers.py', 'Folder Triggers'),
+        ('test_folder_status.py', 'Folder Status'),
+    ]
+
+    print("\n" + "="*70)
+    print("MODULE 5 RESULTS")
+    print("="*70)
+
+    module5_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
+
+    for filename, module_name in folders_files:
+        if filename in file_results:
+            results = file_results[filename]
+
+            total = results['passed'] + results['failed'] + results['skipped']
+            progress = create_progress_bar(results['passed'], total, width=30)
+
+            print(f"\n{module_name}:")
+            print(f"  {progress} {results['passed']}/{total}")
+            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
+
+            module5_results['passed'] += results['passed']
+            module5_results['failed'] += results['failed']
+            module5_results['skipped'] += results['skipped']
+
+    module5_results['total'] = module5_results['passed'] + module5_results['failed'] + module5_results['skipped']
+
+    print("\n" + "="*70)
+    print("MODULE 5 SUMMARY")
+    print("="*70)
+
+    if module5_results['total'] > 0:
+        progress = create_progress_bar(module5_results['passed'], module5_results['total'])
+        print(f"\nProgress: {progress} {module5_results['passed']}/{module5_results['total']} tests")
+        print(f"Result: {module5_results['passed']} passed, {module5_results['failed']} failed, {module5_results['skipped']} skipped")
+    else:
+        print("\nNo tests found")
+
+    all_results.append(('Module 5: Folders', module5_results))
+
+    # ======================================================================
+    # MODULE 6: MEMORIES (75 tests)
+    # ======================================================================
+
+    file_results, output = run_module(
+        "MODULE 6: MEMORIES - MEMORY COLLECTIONS",
+        "tests/unit/memories/",
+        project_root
+    )
+
+    # Expected Memories test files
+    memories_files = [
+        ('test_memory_collection.py', 'Memory Collection'),
+        ('test_memory_files.py', 'Memory Files'),
+        ('test_memory_assignments.py', 'Memory Assignments'),
+    ]
+
+    print("\n" + "="*70)
+    print("MODULE 6 RESULTS")
+    print("="*70)
+
+    module6_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
+
+    for filename, module_name in memories_files:
+        if filename in file_results:
+            results = file_results[filename]
+
+            total = results['passed'] + results['failed'] + results['skipped']
+            progress = create_progress_bar(results['passed'], total, width=30)
+
+            print(f"\n{module_name}:")
+            print(f"  {progress} {results['passed']}/{total}")
+            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
+
+            module6_results['passed'] += results['passed']
+            module6_results['failed'] += results['failed']
+            module6_results['skipped'] += results['skipped']
+
+    module6_results['total'] = module6_results['passed'] + module6_results['failed'] + module6_results['skipped']
+
+    print("\n" + "="*70)
+    print("MODULE 6 SUMMARY")
+    print("="*70)
+
+    if module6_results['total'] > 0:
+        progress = create_progress_bar(module6_results['passed'], module6_results['total'])
+        print(f"\nProgress: {progress} {module6_results['passed']}/{module6_results['total']} tests")
+        print(f"Result: {module6_results['passed']} passed, {module6_results['failed']} failed, {module6_results['skipped']} skipped")
+    else:
+        print("\nNo tests found")
+
+    all_results.append(('Module 6: Memories', module6_results))
+
+    # ======================================================================
     # OVERALL SUMMARY
     # ======================================================================
 

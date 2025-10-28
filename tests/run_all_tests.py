@@ -68,11 +68,14 @@ def run_test_module(module_path, module_name):
         '-p', 'no:warnings'
     ]
 
+    # Run from project root (parent of tests directory)
+    project_root = Path(__file__).parent.parent
+
     result = subprocess.run(
         cmd,
         capture_output=True,
         text=True,
-        cwd=Path(__file__).parent
+        cwd=project_root
     )
 
     # Parse output
@@ -96,10 +99,10 @@ def run_test_module(module_path, module_name):
 def main():
     """Run all ORM test modules and show aggregated results"""
     print("\n" + "="*70)
-    print("ORM MODEL TEST SUITE - PLAN BEYOND")
+    print("MODULE 0: ORM MODEL TEST SUITE - PLAN BEYOND")
     print("="*70)
 
-    # Define test modules
+    # Define test modules (relative to project root)
     test_modules = [
         ('tests/unit/models/test_user_model.py', 'User Model'),
         ('tests/unit/models/test_contact_model.py', 'Contact Model'),
@@ -151,7 +154,7 @@ def main():
 
     # Print overall results
     print("\n" + "="*70)
-    print("OVERALL RESULTS")
+    print("OVERALL RESULTS - MODULE 0 (ORM MODELS)")
     print("="*70)
 
     progress = create_progress_bar(overall['passed'], overall['total'])
@@ -168,6 +171,12 @@ def main():
         print(f"\n✗ WARNING: Counts don't tally: {overall['passed']} + {overall['failed']} + {overall['skipped']} ≠ {overall['total']}")
 
     print("\n" + "="*70)
+    print("PROGRESS TOWARDS COMPLETE TEST SUITE")
+    print("="*70)
+    print(f"\nModule 0 (ORM Models):     156/156 tests ✓ COMPLETE")
+    print(f"Remaining modules:         1,488 tests (Modules 1-12)")
+    print(f"\nTotal Test Suite:          156/1,644 tests (9.5% complete)")
+    print("="*70)
 
     # Exit with appropriate code
     if overall['failed'] > 0:

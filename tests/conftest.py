@@ -2,11 +2,42 @@
 Root conftest.py - Shared fixtures for all tests
 """
 import os
+import sys
 import pytest
 from fastapi.testclient import TestClient
 
-# Set test environment before any app imports
+# Add parent directory to Python path
+# This makes /home/user/plan_beyond importable
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
+
+# Create 'app' module alias by adding current directory as 'app' in sys.modules
+# This allows code to use 'from app.* import' even though directory is 'plan_beyond'
+import types
+app_module_alias = types.ModuleType('app')
+sys.modules['app'] = app_module_alias
+app_module_alias.__path__ = [project_root]
+app_module_alias.__file__ = os.path.join(project_root, '__init__.py')
+
+# Set test environment variables BEFORE importing app (to avoid Settings validation errors)
 os.environ["TESTING"] = "1"
+os.environ["SECRET_KEY"] = "test-secret-key-for-testing-only-min-32-chars-long"
+os.environ["ALGORITHM"] = "HS256"
+os.environ["ACCESS_TOKEN_EXPIRE_MINUTES"] = "43200"
+os.environ["DATABASE_URL"] = "postgresql://test:test@localhost:5432/test_plan_beyond"
+os.environ["AWS_ACCESS_KEY_ID"] = "test-access-key"
+os.environ["AWS_SECRET_ACCESS_KEY"] = "test-secret-key"
+os.environ["AWS_REGION"] = "ap-south-1"
+os.environ["S3_BUCKET"] = "test-bucket"
+os.environ["S3_PUBLIC_BASE_URL"] = "https://test-bucket.s3.amazonaws.com"
+os.environ["KMS_KEY_ID"] = "test-kms-key-id"
+os.environ["SMTP_EMAIL"] = "test@example.com"
+os.environ["SMTP_APP_PASSWORD"] = "test-password"
+os.environ["GEMINI_API_KEY"] = "test-gemini-key"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "test-credentials.json"
+os.environ["TWILIO_ACCOUNT_SID"] = "test-twilio-sid"
+os.environ["TWILIO_AUTH_TOKEN"] = "test-twilio-token"
+os.environ["TWILIO_PHONE_NUMBER"] = "+1234567890"
 
 from app.main import app
 from app.dependencies import get_db

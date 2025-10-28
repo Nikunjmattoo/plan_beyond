@@ -1,27 +1,59 @@
 """
-ORM Tests for DeathDeclaration Model
-Tests SQLAlchemy model schema, relationships, and constraints
+Module 0: ORM Models - DeathDeclaration Model (Tests 67-81)
+
+Validates SQLAlchemy model schema for death declaration system.
+Does NOT create database records - only validates ORM definitions.
+
+Test Categories:
+- Schema validation (Tests 67-68)
+- Foreign keys (Tests 69-70)
+- Column types (Tests 71-72)
+- Nullability (Tests 73-74)
+- Relationships (Tests 75-76)
+- Enum values (Tests 77-78)
+- Timestamps (Test 79)
+- Model behavior (Tests 80-81)
 """
 import pytest
+
+# Third-party
 from sqlalchemy import inspect
 
+# Application imports
 from app.models.death import (
     DeathDeclaration, DeathType, DeclarationState, LLMSafetyCheck,
     DeathReview, LegendLifecycle, Contest, Broadcast
 )
 
 
+# ==============================================================================
+# SCHEMA VALIDATION TESTS (Tests 67-68)
+# ==============================================================================
+
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_table_name():
-    """Test 67: Verify DeathDeclaration model table name is 'death_declarations'"""
+    """
+    Test #67: Verify DeathDeclaration model table name is 'death_declarations'
+
+    Validates that SQLAlchemy maps the DeathDeclaration class to the correct table.
+    """
+    # Act & Assert
     assert DeathDeclaration.__tablename__ == "death_declarations"
 
 
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_all_columns_exist():
-    """Test 68: Verify all required columns exist in DeathDeclaration model"""
+    """
+    Test #68: Verify all required columns exist in DeathDeclaration model
+
+    Ensures the ORM schema matches database schema.
+    DeathDeclaration handles soft/hard death reporting.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     column_names = [col.key for col in mapper.columns]
 
@@ -31,111 +63,184 @@ def test_death_declaration_all_columns_exist():
         'llm_safety_check', 'state', 'created_at', 'updated_at'
     ]
 
+    # Act & Assert
     for col in required_columns:
         assert col in column_names, f"Column '{col}' not found in DeathDeclaration model"
 
 
+# ==============================================================================
+# FOREIGN KEY TESTS (Tests 69-70)
+# ==============================================================================
+
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_root_user_id_foreign_key():
-    """Test 69: Verify root_user_id is a foreign key to users (root_user)"""
+    """
+    Test #69: Verify root_user_id is a foreign key to users (root_user)
+
+    The deceased user whose death is being declared.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     root_user_id_col = mapper.columns['root_user_id']
 
-    # Check if it has foreign keys
+    # Act & Assert
     assert len(root_user_id_col.foreign_keys) > 0
 
-    # Check that it references users.id
     fk = list(root_user_id_col.foreign_keys)[0]
     assert 'users.id' in str(fk.target_fullname)
 
 
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_declarer_contact_id_foreign_key():
-    """Test 70: Verify declared_by_contact_id is a foreign key to contacts (nullable)"""
+    """
+    Test #70: Verify declared_by_contact_id is a foreign key to contacts (nullable)
+
+    The contact who is declaring the death (optional).
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     declarer_col = mapper.columns['declared_by_contact_id']
 
-    # Should be nullable
+    # Act & Assert
     assert declarer_col.nullable is True
-
-    # Should have foreign key
     assert len(declarer_col.foreign_keys) > 0
 
-    # Check that it references contacts.id
     fk = list(declarer_col.foreign_keys)[0]
     assert 'contacts.id' in str(fk.target_fullname)
 
 
+# ==============================================================================
+# COLUMN TYPE TESTS (Tests 71-72)
+# ==============================================================================
+
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_type_enum():
-    """Test 71: Verify type column is Enum (soft/hard)"""
+    """
+    Test #71: Verify type column is Enum (soft/hard)
+
+    Soft = reversible report, Hard = permanent death confirmation.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     type_col = mapper.columns['type']
 
-    # Check if it's an Enum type
+    # Act & Assert
     assert 'Enum' in str(type(type_col.type))
 
 
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_state_enum():
-    """Test 72: Verify state column is Enum"""
+    """
+    Test #72: Verify state column is Enum
+
+    State tracks declaration workflow (pending_review, accepted, rejected, retracted).
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     state_col = mapper.columns['state']
 
-    # Check if it's an Enum type
+    # Act & Assert
     assert 'Enum' in str(type(state_col.type))
 
 
+# ==============================================================================
+# NULLABILITY TESTS (Tests 73-74)
+# ==============================================================================
+
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_message_nullable():
-    """Test 73: Verify message column is nullable"""
+    """
+    Test #73: Verify message column is nullable
+
+    Message from the declarer is optional.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     message_col = mapper.columns['message']
 
-    # message should be nullable
+    # Act & Assert
     assert message_col.nullable is True
 
 
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_evidence_file_nullable():
-    """Test 74: Verify evidence_file_id is nullable"""
+    """
+    Test #74: Verify evidence_file_id is nullable
+
+    Evidence file (death certificate, etc.) is optional.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     evidence_col = mapper.columns['evidence_file_id']
 
-    # evidence should be nullable (not all declarations have evidence)
+    # Act & Assert
     assert evidence_col.nullable is True or evidence_col.nullable is None
 
 
+# ==============================================================================
+# RELATIONSHIP TESTS (Tests 75-76)
+# ==============================================================================
+
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_root_user_relationship():
-    """Test 75: Verify death.root_user relationship exists (implicit via FK)"""
-    # This test verifies the foreign key exists which implies relationship capability
+    """
+    Test #75: Verify death.root_user relationship exists (implicit via FK)
+
+    Foreign key establishes the relationship to the deceased user.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     root_user_id_col = mapper.columns['root_user_id']
+
+    # Act & Assert
     assert len(root_user_id_col.foreign_keys) > 0
 
 
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_declarer_relationship():
-    """Test 76: Verify death.declarer relationship exists (implicit via FK)"""
-    # This test verifies the foreign key exists which implies relationship capability
+    """
+    Test #76: Verify death.declarer relationship exists (implicit via FK)
+
+    Foreign key establishes the relationship to the reporting contact.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     declarer_col = mapper.columns['declared_by_contact_id']
+
+    # Act & Assert
     assert len(declarer_col.foreign_keys) > 0
 
 
+# ==============================================================================
+# ENUM VALUE TESTS (Tests 77-78)
+# ==============================================================================
+
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_type_enum_values():
-    """Test 77: Verify DeathType enum has correct values"""
+    """
+    Test #77: Verify DeathType enum has correct values
+
+    Validates the death type enum values (soft, hard).
+    """
+    # Act & Assert
     assert hasattr(DeathType, 'soft')
     assert hasattr(DeathType, 'hard')
 
@@ -145,49 +250,82 @@ def test_death_type_enum_values():
 
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_declaration_state_enum_values():
-    """Test 78: Verify DeclarationState enum has correct values"""
+    """
+    Test #78: Verify DeclarationState enum has correct values
+
+    Validates the declaration workflow states.
+    """
+    # Act & Assert
     assert hasattr(DeclarationState, 'pending_review')
     assert hasattr(DeclarationState, 'accepted')
     assert hasattr(DeclarationState, 'rejected')
     assert hasattr(DeclarationState, 'retracted')
 
 
+# ==============================================================================
+# TIMESTAMP TESTS (Test 79)
+# ==============================================================================
+
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_timestamps():
-    """Test 79: Verify created_at and updated_at columns exist"""
+    """
+    Test #79: Verify created_at and updated_at columns exist
+
+    Tracks declaration creation and modification times.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     column_names = [col.key for col in mapper.columns]
 
+    # Act & Assert
     assert 'created_at' in column_names
     assert 'updated_at' in column_names
 
 
+# ==============================================================================
+# MODEL BEHAVIOR TESTS (Tests 80-81)
+# ==============================================================================
+
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_repr_method():
-    """Test 80: Verify DeathDeclaration __repr__() method works"""
+    """
+    Test #80: Verify DeathDeclaration __repr__() method works
+
+    Ensures model has readable string representation for debugging.
+    """
+    # Arrange
     death = DeathDeclaration(
         root_user_id=1,
         type=DeathType.soft
     )
 
-    # Should not raise an error
+    # Act
     repr_str = repr(death)
+
+    # Assert
     assert isinstance(repr_str, str)
     assert len(repr_str) > 0
 
 
 @pytest.mark.unit
 @pytest.mark.orm
+@pytest.mark.critical
 def test_death_declaration_cascade_delete():
-    """Test 81: Verify CASCADE delete on root_user_id"""
+    """
+    Test #81: Verify CASCADE delete on root_user_id
+
+    When user is deleted, all their death declarations should be deleted.
+    """
+    # Arrange
     mapper = inspect(DeathDeclaration)
     root_user_id_col = mapper.columns['root_user_id']
-
-    # Get foreign key
     fk = list(root_user_id_col.foreign_keys)[0]
 
-    # Check for CASCADE ondelete
+    # Act & Assert
     assert fk.ondelete == 'CASCADE'

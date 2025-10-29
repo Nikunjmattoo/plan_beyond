@@ -64,3 +64,5 @@ Thumbs.db
 uploads/
 images/
 *.log
+test_audit_output.txt
+test_full_audit.txt

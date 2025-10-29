@@ -1,24 +1,25 @@
-# Minimal requirements for running foundation tests
-# These should all have Python 3.13 wheels available
+# Minimal requirements for Python 3.13 - all versions tested and compatible
+# Tests use SQLite in-memory databases (no PostgreSQL required)
 
-# Testing (Python 3.13 compatible)
-pytest>=8.0.0
-pytest-cov>=4.1.0
-pytest-mock>=3.12.0
-pytest-asyncio>=0.23.0
-httpx>=0.25.2
+# Testing Framework
+pytest>=8.3.0
+pytest-cov>=6.0.0
+pytest-mock>=3.14.0
+pytest-asyncio>=0.24.0
+httpx>=0.28.0
 
-# Core Framework (needed by conftest)
-fastapi>=0.110.0
+# Core Framework
+fastapi>=0.115.0
 slowapi>=0.1.9
+starlette>=0.41.0
 
-# Database (tests use SQLite, not PostgreSQL)
-sqlalchemy>=2.0.25
+# Database
+sqlalchemy>=2.0.36
 
-# Configuration & Validation (Python 3.13 compatible)
-pydantic>=2.8.0
-pydantic-settings>=2.3.0
+# Configuration & Validation
+pydantic>=2.10.0
+pydantic-settings>=2.7.0
 
-# Security (for password hashing in fixtures)
-passlib[bcrypt]==1.7.4
-bcrypt==4.1.1
+# Security (password hashing)
+passlib[bcrypt]>=1.7.4
+bcrypt>=4.2.0

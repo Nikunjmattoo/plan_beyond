@@ -12,9 +12,8 @@ httpx>=0.25.2
 fastapi>=0.110.0
 slowapi>=0.1.9
 
-# Database
+# Database (tests use SQLite, not PostgreSQL)
 sqlalchemy==2.0.23
-psycopg2-binary==2.9.9
 
 # Configuration & Validation (Python 3.13 compatible)
 pydantic>=2.8.0

@@ -1,0 +1,971 @@
+
+======================================================================
+COMPREHENSIVE TEST SUITE - PLAN BEYOND
+======================================================================
+
+======================================================================
+MODULE 0: ORM MODEL TEST SUITE
+======================================================================
+
+Running tests...
+
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /home/user/plan_beyond/tests
+configfile: pytest.ini
+plugins: asyncio-1.2.0, anyio-4.11.0, mock-3.15.1, cov-7.0.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 156 items
+
+tests/unit/models/test_admin_model.py::test_admin_table_name PASSED
+tests/unit/models/test_admin_model.py::test_admin_all_columns_exist PASSED
+tests/unit/models/test_admin_model.py::test_admin_username_unique PASSED
+tests/unit/models/test_admin_model.py::test_admin_email_unique PASSED
+tests/unit/models/test_admin_model.py::test_admin_password_column PASSED
+tests/unit/models/test_admin_model.py::test_admin_otp_nullable PASSED
+tests/unit/models/test_admin_model.py::test_admin_repr_method PASSED
+tests/unit/models/test_admin_model.py::test_admin_otp_verified_default PASSED
+tests/unit/models/test_category_model.py::test_category_table_name PASSED
+tests/unit/models/test_category_model.py::test_category_all_columns_exist PASSED
+tests/unit/models/test_category_model.py::test_category_section_table_name PASSED
+tests/unit/models/test_category_model.py::test_category_code_column_unique PASSED
+tests/unit/models/test_category_model.py::test_category_name_nullable PASSED
+tests/unit/models/test_category_model.py::test_category_sort_index_column PASSED
+tests/unit/models/test_category_model.py::test_category_code_not_nullable PASSED
+tests/unit/models/test_category_model.py::test_category_section_category_id_foreign_key PASSED
+tests/unit/models/test_category_model.py::test_category_repr_method PASSED
+tests/unit/models/test_category_model.py::test_category_section_cascade_delete PASSED
+tests/unit/models/test_contact_model.py::test_contact_model_table_name PASSED
+tests/unit/models/test_contact_model.py::test_contact_all_columns_exist PASSED
+tests/unit/models/test_contact_model.py::test_contact_first_name_column PASSED
+tests/unit/models/test_contact_model.py::test_contact_emails_json_column PASSED
+tests/unit/models/test_contact_model.py::test_contact_phone_numbers_json_column PASSED
+tests/unit/models/test_contact_model.py::test_contact_owner_user_id_foreign_key PASSED
+tests/unit/models/test_contact_model.py::test_contact_linked_user_id_foreign_key PASSED
+tests/unit/models/test_contact_model.py::test_contact_is_emergency_default_false PASSED
+tests/unit/models/test_contact_model.py::test_contact_owner_relationship PASSED
+tests/unit/models/test_contact_model.py::test_contact_linked_user_relationship PASSED
+tests/unit/models/test_contact_model.py::test_contact_repr_method PASSED
+tests/unit/models/test_contact_model.py::test_contact_cascade_delete PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_table_name PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_all_columns_exist PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_root_user_id_foreign_key PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_declarer_contact_id_foreign_key PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_type_enum PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_state_enum PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_message_nullable PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_evidence_file_nullable PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_root_user_relationship PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_declarer_relationship PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_type_enum_values PASSED
+tests/unit/models/test_death_declaration_model.py::test_declaration_state_enum_values PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_timestamps PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_repr_method PASSED
+tests/unit/models/test_death_declaration_model.py::test_death_declaration_cascade_delete PASSED
+tests/unit/models/test_folder_model.py::test_folder_table_name PASSED
+tests/unit/models/test_folder_model.py::test_folder_all_columns_exist PASSED
+tests/unit/models/test_folder_model.py::test_folder_name_column PASSED
+tests/unit/models/test_folder_model.py::test_folder_user_id_foreign_key PASSED
+tests/unit/models/test_folder_model.py::test_folder_user_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_branches_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_leaves_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_trigger_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_files_relationship PASSED
+tests/unit/models/test_folder_model.py::test_folder_timestamps PASSED
+tests/unit/models/test_folder_model.py::test_folder_repr_method PASSED
+tests/unit/models/test_folder_model.py::test_folder_cascade_delete PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_table_name PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_all_columns_exist PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_user_id_foreign_key PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_event_type_enum PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_scheduled_at_nullable PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_is_armed_default PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_user_relationship PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_files_relationship PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_assignments_relationship PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_timestamps PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_repr_method PASSED
+tests/unit/models/test_memory_collection_model.py::test_memory_collection_cascade_delete PASSED
+tests/unit/models/test_relationship_models.py::test_folder_branch_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_folder_branch_unique_constraint PASSED
+tests/unit/models/test_relationship_models.py::test_folder_leaf_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_folder_leaf_unique_constraint PASSED
+tests/unit/models/test_relationship_models.py::test_memory_assignment_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_memory_assignment_unique_constraint PASSED
+tests/unit/models/test_relationship_models.py::test_vault_access_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_vault_access_status_column PASSED
+tests/unit/models/test_relationship_models.py::test_vault_access_unique_constraint PASSED
+tests/unit/models/test_relationship_models.py::test_death_approval_table_name PASSED
+tests/unit/models/test_relationship_models.py::test_death_approval_status_column PASSED
+tests/unit/models/test_relationship_models.py::test_all_relationship_tables_have_timestamps PASSED
+tests/unit/models/test_relationship_models.py::test_all_relationship_tables_have_foreign_keys PASSED
+tests/unit/models/test_relationship_models.py::test_all_relationship_tables_cascade_delete PASSED
+tests/unit/models/test_relationship_models.py::test_folder_branch_all_columns PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_table_name PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_all_columns_exist PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_user_id_foreign_key PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_vault_file_id_foreign_key PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_reminder_date_column PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_status_column PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_urgency_level_column PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_user_relationship PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_vault_file_relationship PASSED
+tests/unit/models/test_reminder_model.py::test_reminder_repr_method PASSED
+tests/unit/models/test_section_model.py::test_section_table_name PASSED
+tests/unit/models/test_section_model.py::test_section_all_columns_exist PASSED
+tests/unit/models/test_section_model.py::test_section_category_id_foreign_key PASSED
+tests/unit/models/test_section_model.py::test_section_code_column PASSED
+tests/unit/models/test_section_model.py::test_section_sort_index_column PASSED
+tests/unit/models/test_section_model.py::test_section_file_import_default PASSED
+tests/unit/models/test_section_model.py::test_section_category_relationship PASSED
+tests/unit/models/test_section_model.py::test_section_unique_constraint PASSED
+tests/unit/models/test_section_model.py::test_section_repr_method PASSED
+tests/unit/models/test_section_model.py::test_section_cascade_delete PASSED
+tests/unit/models/test_step_model.py::test_step_table_name PASSED
+tests/unit/models/test_step_model.py::test_step_all_columns_exist PASSED
+tests/unit/models/test_step_model.py::test_step_section_id_foreign_key PASSED
+tests/unit/models/test_step_model.py::test_step_title_column PASSED
+tests/unit/models/test_step_model.py::test_step_type_enum PASSED
+tests/unit/models/test_step_model.py::test_step_display_order_column PASSED
+tests/unit/models/test_step_model.py::test_step_mandatory_default_false PASSED
+tests/unit/models/test_step_model.py::test_step_section_relationship PASSED
+tests/unit/models/test_step_model.py::test_step_options_relationship PASSED
+tests/unit/models/test_step_model.py::test_step_unique_constraint PASSED
+tests/unit/models/test_step_model.py::test_step_repr_method PASSED
+tests/unit/models/test_step_model.py::test_step_cascade_delete PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_table_name PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_all_columns_exist PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_user_id_foreign_key PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_contact_id_foreign_key PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_status_enum PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_version_column PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_is_primary_default_false PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_unique_constraint PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_repr_method PASSED
+tests/unit/models/test_trustee_model.py::test_trustee_cascade_delete PASSED
+tests/unit/models/test_user_model.py::test_user_model_table_name PASSED
+tests/unit/models/test_user_model.py::test_user_model_all_columns_exist PASSED
+tests/unit/models/test_user_model.py::test_user_email_column_type PASSED
+tests/unit/models/test_user_model.py::test_user_phone_column_type PASSED
+tests/unit/models/test_user_model.py::test_user_password_column_type PASSED
+tests/unit/models/test_user_model.py::test_user_status_column_enum PASSED
+tests/unit/models/test_user_model.py::test_user_email_unique_constraint PASSED
+tests/unit/models/test_user_model.py::test_user_phone_unique_constraint PASSED
+tests/unit/models/test_user_model.py::test_user_email_nullable PASSED
+tests/unit/models/test_user_model.py::test_user_otp_nullable_true PASSED
+tests/unit/models/test_user_model.py::test_user_relationships_defined PASSED
+tests/unit/models/test_user_model.py::test_user_profile_relationship PASSED
+tests/unit/models/test_user_model.py::test_user_contacts_relationship PASSED
+tests/unit/models/test_user_model.py::test_user_repr_method PASSED
+tests/unit/models/test_user_model.py::test_user_status_enum_values PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_table_name PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_all_columns_exist PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_encrypted_dek_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_encrypted_form_data_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_nonce_form_data_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_template_id_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_owner_user_id_foreign_key PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_creation_mode_check_constraint PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_status_column PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_has_source_file_default PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_owner_relationship PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_access_list_relationship PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_timestamps PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_repr_method PASSED
+tests/unit/models/test_vault_file_model.py::test_vault_file_cascade_delete PASSED
+
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.11.14-final-0 _______________
+
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+config.py                          17      0      0      0   100%
+database.py                        49     26     20      0    33%   21-24, 27-33, 36-42, 55-58, 61-67, 70-76
+models/__init__.py                 19      0      0      0   100%
+models/admin.py                    13      0      0      0   100%
+models/card.py                     29      0      0      0   100%
+models/category.py                 61      0      0      0   100%
+models/contact.py                  40      0      0      0   100%
+models/death.py                   122      0      0      0   100%
+models/death_approval.py           12      0      0      0   100%
+models/enums.py                    32      0      0      0   100%
+models/file.py                     18      0      0      0   100%
+models/folder.py                   70      0      0      0   100%
+models/memory.py                   48      0      0      0   100%
+models/relationship.py             26      0      0      0   100%
+models/release.py                  19      0      0      0   100%
+models/reminder.py                 44      0      0      0   100%
+models/reminder_preference.py      43      0      0      0   100%
+models/step.py                     52      0      0      0   100%
+models/trustee.py                  17      0      0      0   100%
+models/user.py                     60      4      2      0    90%   58, 63-66
+models/user_forms.py               38      0      0      0   100%
+models/vault.py                    52      0      0      0   100%
+models/verification.py             33      0      0      0   100%
+---------------------------------------------------------------------------
+TOTAL                             914     30     22      0    94%
+Coverage HTML written to dir htmlcov
+Coverage XML written to file coverage.xml
+============================= slowest 10 durations =============================
+0.08s call     unit/models/test_admin_model.py::test_admin_repr_method
+0.00s setup    unit/models/test_admin_model.py::test_admin_table_name
+0.00s setup    unit/models/test_category_model.py::test_category_code_not_nullable
+0.00s call     unit/models/test_vault_file_model.py::test_vault_file_creation_mode_check_constraint
+0.00s setup    unit/models/test_trustee_model.py::test_trustee_cascade_delete
+0.00s setup    unit/models/test_admin_model.py::test_admin_password_column
+0.00s setup    unit/models/test_admin_model.py::test_admin_otp_verified_default
+0.00s setup    unit/models/test_contact_model.py::test_contact_repr_method
+0.00s setup    unit/models/test_user_model.py::test_user_model_all_columns_exist
+0.00s setup    unit/models/test_death_declaration_model.py::test_death_declaration_repr_method
+============================= 156 passed in 1.89s ==============================
+
+======================================================================
+MODULE 0 SUMMARY
+======================================================================
+
+Progress: [========================================] 156/156 tests
+Result: 156 passed, 0 failed, 0 skipped
+
+======================================================================
+MODULE 1: FOUNDATION - DATABASE MODELS
+======================================================================
+
+Running tests...
+
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /home/user/plan_beyond/tests
+configfile: pytest.ini
+plugins: asyncio-1.2.0, anyio-4.11.0, mock-3.15.1, cov-7.0.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 102 items
+
+tests/unit/foundation/test_database_models.py::test_create_user_with_minimal_required_fields PASSED
+tests/unit/foundation/test_database_models.py::test_create_user_with_all_optional_fields FAILED
+tests/unit/foundation/test_database_models.py::test_user_email_unique_constraint_enforced PASSED
+tests/unit/foundation/test_database_models.py::test_user_phone_unique_constraint_enforced PASSED
+tests/unit/foundation/test_database_models.py::test_user_status_enum_validation PASSED
+tests/unit/foundation/test_database_models.py::test_create_contact_with_minimal_fields ERROR
+tests/unit/foundation/test_database_models.py::test_create_contact_with_all_fields ERROR
+tests/unit/foundation/test_database_models.py::test_contact_owner_foreign_key_valid ERROR
+tests/unit/foundation/test_database_models.py::test_contact_owner_foreign_key_invalid_raises PASSED
+tests/unit/foundation/test_database_models.py::test_contact_cascade_delete_when_owner_deleted ERROR
+
+==================================== ERRORS ====================================
+__________ ERROR at setup of test_create_contact_with_minimal_fields ___________
+/usr/local/lib/python3.11/dist-packages/pytest_asyncio/plugin.py:733: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/fixtures/user_fixtures.py:28: in test_user
+    password=hash_password("Test@1234"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+____________ ERROR at setup of test_create_contact_with_all_fields _____________
+/usr/local/lib/python3.11/dist-packages/pytest_asyncio/plugin.py:733: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/fixtures/user_fixtures.py:28: in test_user
+    password=hash_password("Test@1234"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+____________ ERROR at setup of test_contact_owner_foreign_key_valid ____________
+/usr/local/lib/python3.11/dist-packages/pytest_asyncio/plugin.py:733: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/fixtures/user_fixtures.py:28: in test_user
+    password=hash_password("Test@1234"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+_______ ERROR at setup of test_contact_cascade_delete_when_owner_deleted _______
+/usr/local/lib/python3.11/dist-packages/pytest_asyncio/plugin.py:733: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/fixtures/user_fixtures.py:28: in test_user
+    password=hash_password("Test@1234"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log setup ------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+=================================== FAILURES ===================================
+__________________ test_create_user_with_all_optional_fields ___________________
+tests/unit/foundation/test_database_models.py:56: in test_create_user_with_all_optional_fields
+    password=hash_password("Test@1234"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log call -------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+============================= slowest 10 durations =============================
+0.11s call     unit/foundation/test_database_models.py::test_create_user_with_minimal_required_fields
+0.05s setup    unit/foundation/test_database_models.py::test_create_user_with_minimal_required_fields
+0.04s call     unit/foundation/test_database_models.py::test_user_status_enum_validation
+0.01s teardown unit/foundation/test_database_models.py::test_create_user_with_minimal_required_fields
+0.01s call     unit/foundation/test_database_models.py::test_create_user_with_all_optional_fields
+0.01s setup    unit/foundation/test_database_models.py::test_create_contact_with_minimal_fields
+0.01s setup    unit/foundation/test_database_models.py::test_create_contact_with_all_fields
+0.01s setup    unit/foundation/test_database_models.py::test_contact_owner_foreign_key_valid
+0.01s setup    unit/foundation/test_database_models.py::test_contact_cascade_delete_when_owner_deleted
+0.01s teardown unit/foundation/test_database_models.py::test_contact_cascade_delete_when_owner_deleted
+=========================== short test summary info ============================
+FAILED tests/unit/foundation/test_database_models.py::test_create_user_with_all_optional_fields - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+ERROR tests/unit/foundation/test_database_models.py::test_create_contact_with_minimal_fields - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+ERROR tests/unit/foundation/test_database_models.py::test_create_contact_with_all_fields - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+ERROR tests/unit/foundation/test_database_models.py::test_contact_owner_foreign_key_valid - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+ERROR tests/unit/foundation/test_database_models.py::test_contact_cascade_delete_when_owner_deleted - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+==================== 1 failed, 5 passed, 4 errors in 2.15s =====================
+
+======================================================================
+MODULE 1 SUMMARY
+======================================================================
+
+Progress: [============================>           ] 5/7 tests
+Result: 5 passed, 2 failed, 0 skipped
+
+======================================================================
+MODULE 2: AUTH - USER AUTHENTICATION & AUTHORIZATION
+======================================================================
+
+Running tests...
+
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /home/user/plan_beyond/tests
+configfile: pytest.ini
+plugins: asyncio-1.2.0, anyio-4.11.0, mock-3.15.1, cov-7.0.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 130 items
+
+tests/unit/auth/test_admin_controller.py::test_create_admin_with_username_email FAILED
+tests/unit/auth/test_admin_controller.py::test_admin_password_hashed_on_save FAILED
+tests/unit/auth/test_admin_controller.py::test_admin_otp_generation FAILED
+tests/unit/auth/test_admin_controller.py::test_get_admin_by_username FAILED
+tests/unit/auth/test_admin_controller.py::test_get_admin_by_email FAILED
+
+=================================== FAILURES ===================================
+____________________ test_create_admin_with_username_email _____________________
+tests/unit/auth/test_admin_controller.py:31: in test_create_admin_with_username_email
+    password=hash_password("AdminPass123!"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log call -------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+______________________ test_admin_password_hashed_on_save ______________________
+tests/unit/auth/test_admin_controller.py:58: in test_admin_password_hashed_on_save
+    password=hash_password(plain_password),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log call -------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+__________________________ test_admin_otp_generation ___________________________
+tests/unit/auth/test_admin_controller.py:85: in test_admin_otp_generation
+    password=hash_password("Password123"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log call -------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+__________________________ test_get_admin_by_username __________________________
+tests/unit/auth/test_admin_controller.py:115: in test_get_admin_by_username
+    password=hash_password("Password123"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log call -------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+___________________________ test_get_admin_by_email ____________________________
+tests/unit/auth/test_admin_controller.py:143: in test_get_admin_by_email
+    password=hash_password("Password123"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+core/security.py:6: in hash_password
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/utils/handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py:655: in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+------------------------------ Captured log call -------------------------------
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+============================= slowest 10 durations =============================
+0.05s setup    unit/auth/test_admin_controller.py::test_create_admin_with_username_email
+0.01s teardown unit/auth/test_admin_controller.py::test_create_admin_with_username_email
+0.01s call     unit/auth/test_admin_controller.py::test_create_admin_with_username_email
+0.01s call     unit/auth/test_admin_controller.py::test_admin_password_hashed_on_save
+0.01s call     unit/auth/test_admin_controller.py::test_admin_otp_generation
+0.01s call     unit/auth/test_admin_controller.py::test_get_admin_by_username
+0.01s call     unit/auth/test_admin_controller.py::test_get_admin_by_email
+0.01s teardown unit/auth/test_admin_controller.py::test_admin_password_hashed_on_save
+0.01s teardown unit/auth/test_admin_controller.py::test_get_admin_by_email
+0.00s teardown unit/auth/test_admin_controller.py::test_get_admin_by_username
+=========================== short test summary info ============================
+FAILED tests/unit/auth/test_admin_controller.py::test_create_admin_with_username_email - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+FAILED tests/unit/auth/test_admin_controller.py::test_admin_password_hashed_on_save - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+FAILED tests/unit/auth/test_admin_controller.py::test_admin_otp_generation - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+FAILED tests/unit/auth/test_admin_controller.py::test_get_admin_by_username - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+FAILED tests/unit/auth/test_admin_controller.py::test_get_admin_by_email - ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+============================== 5 failed in 2.71s ===============================
+
+======================================================================
+MODULE 2 SUMMARY
+======================================================================
+
+Progress: [>                                       ] 0/10 tests
+Result: 0 passed, 10 failed, 0 skipped
+
+======================================================================
+MODULE 3: VAULT & ENCRYPTION
+======================================================================
+
+Running tests...
+
+ImportError while loading conftest '/home/user/plan_beyond/tests/conftest.py'.
+tests/conftest.py:69: in <module>
+    from app.main import app
+main.py:19: in <module>
+    from app.routers import auth, s3_upload, user, contact, file
+routers/auth.py:59: in <module>
+    from twilio.rest import Client
+E   ModuleNotFoundError: No module named 'twilio'
+
+======================================================================
+MODULE 3 SUMMARY
+======================================================================
+
+No tests found
+
+======================================================================
+MODULE 4: CATEGORIES
+======================================================================
+
+Running tests...
+
+ImportError while loading conftest '/home/user/plan_beyond/tests/conftest.py'.
+tests/conftest.py:69: in <module>
+    from app.main import app
+main.py:19: in <module>
+    from app.routers import auth, s3_upload, user, contact, file
+routers/auth.py:59: in <module>
+    from twilio.rest import Client
+E   ModuleNotFoundError: No module named 'twilio'
+
+======================================================================
+MODULE 4 SUMMARY
+======================================================================
+
+No tests found
+
+======================================================================
+OVERALL SUMMARY - ALL MODULES
+======================================================================
+
+[OK] Module 0: ORM Models:
+  Passed: 156, Failed: 0, Skipped: 0, Total: 156
+
+[FAIL] Module 1: Foundation - Database Models:
+  Passed: 5, Failed: 2, Skipped: 0, Total: 7
+
+[FAIL] Module 2: Auth:
+  Passed: 0, Failed: 10, Skipped: 0, Total: 10
+
+[OK] Module 3: Vault & Encryption:
+  Passed: 0, Failed: 0, Skipped: 0, Total: 0
+
+[OK] Module 4: Categories:
+  Passed: 0, Failed: 0, Skipped: 0, Total: 0
+
+======================================================================
+OVERALL RESULTS
+======================================================================
+
+Progress: [=====================================>  ] 161/173 tests
+
+Result: 161 passed, 12 failed, 0 skipped
+Total:  173 tests
+
+[OK] Counts tally correctly: 161 + 12 + 0 = 173
+
+======================================================================
+[!] FAILED TESTS (Production Bugs Found)
+======================================================================
+
+12 test(s) failed - these tests found production bugs.
+See detailed failure output and bug reports above.
+======================================================================
+
+======================================================================
+PROGRESS TOWARDS COMPLETE TEST SUITE
+======================================================================
+
+[OK] Module 0 (ORM Models):        156/156 tests
+[OK] Module 1 (Foundation):        7/102 tests
+     Module 1 Remaining:           95 tests
+[OK] Module 2 (Auth):              10/130 tests
+     Module 2 Remaining:           120 tests
+[OK] Module 3 (Vault):             0/125 tests
+[OK] Module 4 (Categories):        0/107 tests
+     Modules 5-12:                 1,025 tests
+
+Total Completed:               173/1,644 tests
+Completion:                    10.5%
+======================================================================

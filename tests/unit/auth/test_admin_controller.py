@@ -317,5 +317,6 @@ def test_admin_otp_different_from_user_otp(db_session):
 
     # Both should exist with same OTP (but in different tables)
     assert user.otp == admin.otp == "111111"
-    assert user.id != admin.id  # Different records
+    # user.id and admin.id are from different tables, so can be same value
     # This documents that OTPs are table-specific, not global
+    assert user.email != admin.email  # Different entities

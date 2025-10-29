@@ -379,10 +379,10 @@ def main():
     module4_count = all_results[4][1]['total'] if len(all_results) > 4 else 0
 
     print(f"\n[OK] Module 0 (ORM Models):        {module0_count}/156 tests")
-    print(f"[OK] Module 1 (Foundation):        {module1_count}/102 tests (database models only)")
+    print(f"[OK] Module 1 (Foundation):        {module1_count}/102 tests")
     print(f"     Module 1 Remaining:           {102 - module1_count} tests")
-    print(f"[OK] Module 2 (Auth):              {module2_count}/130 tests (unit tests only)")
-    print(f"     Module 2 Remaining:           {130 - module2_count} tests (integration tests)")
+    print(f"[OK] Module 2 (Auth):              {module2_count}/130 tests")
+    print(f"     Module 2 Remaining:           {130 - module2_count} tests")
     print(f"[OK] Module 3 (Vault):             {module3_count}/125 tests")
     print(f"[OK] Module 4 (Categories):        {module4_count}/107 tests")
     print(f"     Modules 5-12:                 1,025 tests")

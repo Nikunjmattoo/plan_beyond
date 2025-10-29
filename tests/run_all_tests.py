@@ -132,23 +132,11 @@ def main():
         ('test_relationship_models.py', 'Relationship Models'),
     ]
 
-    print("\n" + "="*70)
-    print("PER MODULE RESULTS")
-    print("="*70)
-
     module0_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
 
     for filename, module_name in orm_files:
         if filename in file_results:
             results = file_results[filename]
-
-            total = results['passed'] + results['failed'] + results['skipped']
-            progress = create_progress_bar(results['passed'], total, width=30)
-
-            print(f"\n{module_name}:")
-            print(f"  {progress} {results['passed']}/{total}")
-            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
-
             module0_results['passed'] += results['passed']
             module0_results['failed'] += results['failed']
             module0_results['skipped'] += results['skipped']
@@ -176,7 +164,7 @@ def main():
     )
 
     print("\n" + "="*70)
-    print("MODULE 1 RESULTS")
+    print("MODULE 1 SUMMARY")
     print("="*70)
 
     module1_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
@@ -217,23 +205,11 @@ def main():
         ('test_user_status_lifecycle.py', 'User Status Lifecycle'),
     ]
 
-    print("\n" + "="*70)
-    print("MODULE 2 RESULTS")
-    print("="*70)
-
     module2_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
 
     for filename, module_name in auth_files:
         if filename in file_results:
             results = file_results[filename]
-
-            total = results['passed'] + results['failed'] + results['skipped']
-            progress = create_progress_bar(results['passed'], total, width=30)
-
-            print(f"\n{module_name}:")
-            print(f"  {progress} {results['passed']}/{total}")
-            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
-
             module2_results['passed'] += results['passed']
             module2_results['failed'] += results['failed']
             module2_results['skipped'] += results['skipped']
@@ -274,23 +250,11 @@ def main():
         ('test_exceptions.py', 'Exceptions'),
     ]
 
-    print("\n" + "="*70)
-    print("MODULE 3 RESULTS")
-    print("="*70)
-
     module3_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
 
     for filename, module_name in vault_files:
         if filename in file_results:
             results = file_results[filename]
-
-            total = results['passed'] + results['failed'] + results['skipped']
-            progress = create_progress_bar(results['passed'], total, width=30)
-
-            print(f"\n{module_name}:")
-            print(f"  {progress} {results['passed']}/{total}")
-            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
-
             module3_results['passed'] += results['passed']
             module3_results['failed'] += results['failed']
             module3_results['skipped'] += results['skipped']
@@ -331,23 +295,11 @@ def main():
         ('test_release_formatting.py', 'Release Formatting'),
     ]
 
-    print("\n" + "="*70)
-    print("MODULE 4 RESULTS")
-    print("="*70)
-
     module4_results = {'passed': 0, 'failed': 0, 'skipped': 0, 'total': 0}
 
     for filename, module_name in categories_files:
         if filename in file_results:
             results = file_results[filename]
-
-            total = results['passed'] + results['failed'] + results['skipped']
-            progress = create_progress_bar(results['passed'], total, width=30)
-
-            print(f"\n{module_name}:")
-            print(f"  {progress} {results['passed']}/{total}")
-            print(f"  Passed: {results['passed']}, Failed: {results['failed']}, Skipped: {results['skipped']}")
-
             module4_results['passed'] += results['passed']
             module4_results['failed'] += results['failed']
             module4_results['skipped'] += results['skipped']
